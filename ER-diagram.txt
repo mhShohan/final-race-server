@@ -1,0 +1,129 @@
+Admin [icon:azure-users]{
+  _id string pk
+  name string
+  designation string
+  departmentId ObjectId fk
+  hallId ObjectId fk
+  role enum
+}
+
+Faculty [icon:factory]{
+  _id string pk
+  name string unique
+}
+
+Department [icon:database]{
+  _id string pk
+  name string unique
+  shortName string unique
+  facultyId ObjectId fk
+}
+
+Course [icon:database]{
+  _id string pk
+  name string unique
+  code string unique
+  credit number
+  facultyId ObjectId fk
+  departmentId ObjectId fk
+  year enum
+  semester enum
+}
+
+Hall [icon:home]{
+  _id string pk
+  name string
+}
+
+Student [icon:user] {
+  _id string pk
+  studentId string unique
+  name string
+  dateOfBirth Date
+  fatherName string
+  motherName string
+  faculty string
+  avatar string
+  session string
+  phone string
+  departmentId ObjectId fk
+  residentialHall ObjectId fk
+  educationalQualifications []
+  presentAddress Address
+  permanentAddress Address
+  nationality  string
+  religion string
+  status enum
+  otp number
+  isVerified boolean
+  certified boolean
+}
+
+EducationalQualification [icon:azure-education]{
+  name string
+  passingYear number
+  institute string
+  board enum
+  roll string
+  GPA number
+}
+
+Address [icon:airplane]{
+  village string
+  subDistrict string
+  postOffice string
+  district string
+  zipCode string
+}
+
+Semester [icon:safari]{
+  _id string pk
+  studentId ObjectId fk
+  examType enum
+  year enum
+  semester enum
+  courses ObjectId[] fk
+  semesterFeeForm ObjectId fk
+  residentialFeeForm ObjectId fk
+  departmentalFeeForm ObjectId fk
+  status enum
+  examYear number
+  totalFee number 
+  totalCredit number
+  paymentId ObjectId fk
+}
+
+SemesterFeeForm [icon:apple-pay]{
+  _id string pk
+}
+
+ResidentialFeeForm [icon:apple-pay]{
+  _id string pk
+}
+
+DepartmentalFeeForm [icon:apple-pay]{
+  _id string pk
+}
+
+Payment [icon:payment]{
+  _id string pk
+  total number 
+  semesterFee number
+  residentialFee number
+  departmentalFee number
+  studentId ObjectId fk
+  semesterId ObjectId fk
+}
+
+Student.educationalQualifications > EducationalQualification
+Student.presentAddress - Address 
+Student.permanentAddress - Address 
+Student.departmentId > Department._id
+Student.residentialHall > Hall._id
+Admin.departmentId > Department._id
+Admin.hallId > Hall._id
+Course.departmentId  > Department._id
+Course.facultyId  > Faculty._id
+Department.facultyId  > Faculty._id 
+Semester.studentId > Student._id 
+Semester.courses > Course._id 
