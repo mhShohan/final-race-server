@@ -1,6 +1,8 @@
 Admin [icon:azure-users]{
   _id string pk
   name string
+  email string
+  password string
   designation string
   departmentId ObjectId fk
   hallId ObjectId fk
@@ -39,6 +41,8 @@ Student [icon:user] {
   _id string pk
   studentId string unique
   name string
+  email string
+  password string
   dateOfBirth Date
   fatherName string
   motherName string
@@ -112,6 +116,10 @@ SemesterFeeForm [icon:apple-pay]{
 ResidentialFeeForm [icon:apple-pay]{
   _id string pk
   hallId ObjectId fk
+  fee number
+  from Date
+  to Date
+  othersFee number
 }
 
 DepartmentalFeeForm [icon:apple-pay]{
