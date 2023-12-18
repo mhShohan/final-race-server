@@ -83,9 +83,9 @@ Semester [icon:safari]{
   year enum
   semester enum
   courses ObjectId[] fk
-  semesterFeeForm ObjectId fk
-  residentialFeeForm ObjectId fk
-  departmentalFeeForm ObjectId fk
+  semesterFeeFormId ObjectId fk
+  residentialFeeFormId ObjectId fk
+  departmentalFeeFormId ObjectId fk
   status enum
   examYear number
   totalFee number 
@@ -95,14 +95,32 @@ Semester [icon:safari]{
 
 SemesterFeeForm [icon:apple-pay]{
   _id string pk
+  tuitionFee number
+  transport number 
+  library number 
+  centralSports number
+  studentWelfare number
+  treatment number
+  roverScout number 
+  BNCC number 
+  computerFee number 
+  semesterExamFee number
+  admitCard number
+  othersFee number
 }
 
 ResidentialFeeForm [icon:apple-pay]{
   _id string pk
+  hallId ObjectId fk
 }
 
 DepartmentalFeeForm [icon:apple-pay]{
   _id string pk
+  departmentId ObjectId fk
+  centerFee number 
+  association number
+  developmentFee number
+  amercementFee number
 }
 
 Payment [icon:payment]{
@@ -113,6 +131,9 @@ Payment [icon:payment]{
   departmentalFee number
   studentId ObjectId fk
   semesterId ObjectId fk
+  semesterFeeFormId ObjectId fk
+  residentialFeeFormId ObjectId fk
+  departmentalFeeFormId ObjectId fk
 }
 
 Student.educationalQualifications > EducationalQualification
@@ -120,10 +141,27 @@ Student.presentAddress - Address
 Student.permanentAddress - Address 
 Student.departmentId > Department._id
 Student.residentialHall > Hall._id
+
 Admin.departmentId > Department._id
 Admin.hallId > Hall._id
+
 Course.departmentId  > Department._id
 Course.facultyId  > Faculty._id
+
 Department.facultyId  > Faculty._id 
+
 Semester.studentId > Student._id 
 Semester.courses > Course._id 
+Semester.paymentId - Payment._id 
+Semester.semesterFeeFormId - SemesterFeeForm._id 
+Semester.residentialFeeFormId - ResidentialFeeForm._id 
+Semester.departmentalFeeFormId - DepartmentalFeeForm._id 
+
+ResidentialFeeForm.hallId > Hall._id
+DepartmentalFeeForm.departmentId > Department._id
+
+Payment.studentId > Student._id 
+Payment.semesterId > Semester._id 
+Payment.semesterFeeFormId - SemesterFeeForm._id 
+Payment.residentialFeeFormId - ResidentialFeeForm._id 
+Payment.departmentalFeeFormId - DepartmentalFeeForm._id 
