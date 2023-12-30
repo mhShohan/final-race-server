@@ -95,6 +95,31 @@ Semester [icon:safari]{
   totalFee number 
   totalCredit number
   paymentId ObjectId fk
+  feedback: Feedback
+}
+
+Feedback {
+    from: enum,
+    message: string
+}
+
+RegistrationInfo [color:blueviolet] {
+  _id string pk
+  facultyId ObjectId
+  departmentId ObjectId
+ 
+  tuitionFee number
+  transport number 
+  library number 
+  centralSports number
+  studentWelfare number
+  treatment number
+  roverScout number 
+  BNCC number 
+  computerFee number 
+  semesterExamFee number
+  admitCard number
+  othersFee number
 }
 
 SemesterFeeForm [icon:apple-pay]{
@@ -119,6 +144,7 @@ ResidentialFeeForm [icon:apple-pay]{
   fee number
   from Date
   to Date
+  totalFee number
   othersFee number
 }
 
@@ -144,7 +170,7 @@ Payment [icon:payment]{
   departmentalFeeFormId ObjectId fk
 }
 
-Student.educationalQualifications > EducationalQualification
+Student.educationalQualifications - EducationalQualification
 Student.presentAddress - Address 
 Student.permanentAddress - Address 
 Student.departmentId > Department._id
@@ -164,6 +190,7 @@ Semester.paymentId - Payment._id
 Semester.semesterFeeFormId - SemesterFeeForm._id 
 Semester.residentialFeeFormId - ResidentialFeeForm._id 
 Semester.departmentalFeeFormId - DepartmentalFeeForm._id 
+Semester.feedback - Feedback
 
 ResidentialFeeForm.hallId > Hall._id
 DepartmentalFeeForm.departmentId > Department._id
@@ -173,3 +200,6 @@ Payment.semesterId > Semester._id
 Payment.semesterFeeFormId - SemesterFeeForm._id 
 Payment.residentialFeeFormId - ResidentialFeeForm._id 
 Payment.departmentalFeeFormId - DepartmentalFeeForm._id 
+
+RegistrationInfo.departmentId > Department._id
+RegistrationInfo.facultyId > Faculty._id
