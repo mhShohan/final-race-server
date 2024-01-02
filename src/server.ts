@@ -1,13 +1,13 @@
 import { Server, createServer } from 'http';
 import mongoose from 'mongoose';
 import app from './app';
-import config from '@/config';
+import config from './app/config';
 
 let server: Server = createServer(app);
 
 async function main() {
   try {
-    await mongoose.connect(config.LOCAL_MONGO_URI as string);
+    await mongoose.connect(config.CLOUD_MONGO_URI as string);
 
     server = server.listen(config.PORT, () => {
       console.log(`Server is listening on port ${config.PORT}`);

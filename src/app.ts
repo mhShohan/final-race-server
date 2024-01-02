@@ -1,12 +1,14 @@
 import cors from 'cors';
 import express, { Application } from 'express';
-import rootRoutes from '@/routes';
-import notFound from '@/middlewares/notFound';
-import globalErrorHandler from '@/middlewares/globalErrorhandler';
+import rootRoutes from './app/routes';
+import notFound from './app/middlewares/notFound';
+import globalErrorHandler from './app/middlewares/globalErrorhandler';
+import morgan from 'morgan';
 
 const app: Application = express();
 
 app.use(express.json());
+app.use(morgan('dev'));
 app.use(cors({ origin: ['http://localhost:5173'] }));
 
 // application routes
