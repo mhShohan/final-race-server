@@ -34,7 +34,7 @@ const getSingleFaculty = asyncHandler(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: STATUS.OK,
-    message: 'All Faculties fetched Successfully',
+    message: 'Faculty fetched Successfully',
     data: result,
   });
 });

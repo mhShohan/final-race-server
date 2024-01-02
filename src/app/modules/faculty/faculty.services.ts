@@ -11,8 +11,8 @@ class FacultyService {
   }
 
   async read(id: string) {
-    if (!(await this._isExists(id)))
-      throw new CustomError(STATUS.NOT_FOUND, 'Faculty is not found!', 'NOT_FOUND');
+    await this._isExists(id)
+
     return this.model.findById(id);
   }
 
@@ -21,13 +21,15 @@ class FacultyService {
   }
 
   async update(id: string, payload: IFaculty) {
-    if (!(await this._isExists(id)))
-      throw new CustomError(STATUS.NOT_FOUND, 'Faculty is not found!', 'NOT_FOUND');
+    await this._isExists(id)
+
     return this.model.findByIdAndUpdate(id, payload, { new: true, runValidators: true });
   }
 
   private async _isExists(id: string) {
-    return await this.model.findById(id);
+    if (!await this.model.findById(id)) {
+      throw new CustomError(STATUS.NOT_FOUND, 'Faculty is not found!', 'NOT_FOUND');
+    }
   }
 }
 

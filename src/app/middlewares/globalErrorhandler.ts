@@ -44,6 +44,12 @@ const globalErrorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     errorResponse.statusCode = err.statusCode;
     errorResponse.message = err.message;
     errorResponse.errors = errors;
+  } else if (err?.code === 11000) {
+    const [key, value] = Object.entries(err.keyValue)[0];
+
+    errorResponse.statusCode = STATUS.CONFLICT
+    errorResponse.message = 'Duplicate Entities!'
+    errorResponse.errors = { [key]: `${value} is Already Exists!` }
   }
 
   return res.status(errorResponse.statusCode).json(errorResponse);
