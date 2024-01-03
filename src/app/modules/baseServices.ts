@@ -38,7 +38,7 @@ class BaseServices<T> {
 
   protected async _isExists(id: string) {
     if (!await this.model.findById(id)) {
-      throw new CustomError(STATUS.NOT_FOUND, 'Faculty is not found!', 'NOT_FOUND');
+      throw new CustomError(STATUS.NOT_FOUND, 'Data is not found!', 'NOT_FOUND');
     }
   }
 }
