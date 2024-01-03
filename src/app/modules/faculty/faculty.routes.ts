@@ -5,9 +5,9 @@ import validateRequest from '../../middlewares/validateRequest';
 
 const facultyRoutes = Router();
 
-facultyRoutes.get('/', facultyController.getAllFaculties);
-facultyRoutes.get('/:id', facultyController.getSingleFaculty);
-facultyRoutes.post('/', validateRequest(facultyValidator), facultyController.createFaculty);
-facultyRoutes.patch('/:id', validateRequest(facultyValidator), facultyController.updateFaculty);
+facultyRoutes.get('/', facultyController.getAll);
+facultyRoutes.get('/:id', facultyController.getSingle);
+facultyRoutes.post('/', validateRequest(facultyValidator), facultyController.create);
+facultyRoutes.patch('/:id', validateRequest(facultyValidator), facultyController.update);
 
 export default facultyRoutes;

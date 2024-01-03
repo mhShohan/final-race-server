@@ -17,3 +17,12 @@ Project Start - 31 December, 2023
 - GET - /departments
 - GET - /departments/:id
 - PATCH - /departments/:id
+
+### Hall
+
+- POST - /halls
+- GET - /halls
+- GET - /halls/:id
+- PATCH - /halls/:id
+
+### Course

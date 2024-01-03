@@ -4,7 +4,7 @@ import sendResponse from '../../lib/sendResponse';
 import facultyServices from './faculty.services';
 
 // Create
-const createFaculty = asyncHandler(async (req, res) => {
+const create = asyncHandler(async (req, res) => {
   const result = await facultyServices.create(req.body);
 
   sendResponse(res, {
@@ -16,7 +16,7 @@ const createFaculty = asyncHandler(async (req, res) => {
 });
 
 // update
-const updateFaculty = asyncHandler(async (req, res) => {
+const update = asyncHandler(async (req, res) => {
   const result = await facultyServices.update(req.params.id, req.body);
 
   sendResponse(res, {
@@ -28,7 +28,7 @@ const updateFaculty = asyncHandler(async (req, res) => {
 });
 
 // get one by id
-const getSingleFaculty = asyncHandler(async (req, res) => {
+const getSingle = asyncHandler(async (req, res) => {
   const result = await facultyServices.read(req.params.id);
 
   sendResponse(res, {
@@ -40,7 +40,7 @@ const getSingleFaculty = asyncHandler(async (req, res) => {
 });
 
 // get all
-const getAllFaculties = asyncHandler(async (_req, res) => {
+const getAll = asyncHandler(async (_req, res) => {
   const result = await facultyServices.readAll();
 
   sendResponse(res, {
@@ -51,6 +51,6 @@ const getAllFaculties = asyncHandler(async (_req, res) => {
   });
 });
 
-const facultyController = { createFaculty, updateFaculty, getSingleFaculty, getAllFaculties };
+const facultyController = { create, update, getSingle, getAll };
 
 export default facultyController;
