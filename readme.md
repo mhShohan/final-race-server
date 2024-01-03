@@ -26,3 +26,8 @@ Project Start - 31 December, 2023
 - PATCH - /halls/:id
 
 ### Course
+
+- POST - /courses
+- GET - /courses
+- GET - /courses/:id
+- PATCH - /courses/:id
