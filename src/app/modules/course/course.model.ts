@@ -31,14 +31,17 @@ const courseSchema = new Schema<ICourse>(
     year: {
       type: String,
       enum: academicYear,
+      required: true
     },
     semester: {
       type: String,
       enum: academicSemester,
+      required: true
     },
     type: {
       type: String,
       enum: academicType,
+      required: true
     }
   },
   { timestamps: true },

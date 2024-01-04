@@ -31,3 +31,10 @@ Project Start - 31 December, 2023
 - GET - /courses
 - GET - /courses/:id
 - PATCH - /courses/:id
+
+### Admin
+
+- POST - /admins
+- GET - /admins
+- GET - /admins/:id
+- PATCH - /admins/:id
