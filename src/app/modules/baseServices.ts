@@ -13,7 +13,8 @@ class BaseServices<T> {
     this.model = model
   }
 
-  async create<P>(payload: P) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async create(payload: any) {
     return this.model.create(payload)
   }
 

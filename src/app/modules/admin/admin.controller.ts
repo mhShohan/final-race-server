@@ -10,7 +10,7 @@ const create = asyncHandler(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: STATUS.CREATED,
-    message: 'Course Created Successfully',
+    message: 'Admin Created Successfully',
     data: result,
   });
 });
@@ -22,7 +22,7 @@ const update = asyncHandler(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: STATUS.OK,
-    message: 'Course updated Successfully',
+    message: 'Admin updated Successfully',
     data: result,
   });
 });
@@ -34,8 +34,8 @@ const getSingle = asyncHandler(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: STATUS.OK,
-    message: 'Course fetched Successfully',
-    data: result,
+    message: 'Admin fetched Successfully',
+    data: result[0],
   });
 });
 
@@ -46,11 +46,23 @@ const getAll = asyncHandler(async (_req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: STATUS.OK,
-    message: 'All Courses fetched Successfully',
+    message: 'All Admins fetched Successfully',
     data: result,
   });
 });
 
-const adminControllers = { create, update, getSingle, getAll };
+// login
+const login = asyncHandler(async (req, res) => {
+  const result = await adminServices.login(req.body);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: STATUS.OK,
+    message: 'Admin login Successfully',
+    data: result,
+  });
+});
+
+const adminControllers = { create, update, getSingle, getAll, login };
 
 export default adminControllers;

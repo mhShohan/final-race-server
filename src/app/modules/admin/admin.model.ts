@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { adminRole } from '../../constants/constants';
 import { IAdmin } from './admin.interface';
-import bcrypt from 'bcrypt'
+import hashPassword from '../../utils/hashPassword';
 
 const adminSchema = new Schema<IAdmin>(
   {
@@ -38,7 +38,7 @@ const adminSchema = new Schema<IAdmin>(
 
 adminSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
-    this.password = await bcrypt.hash(this.password, 10);
+    this.password = await hashPassword(this.password)
   }
 
   next();

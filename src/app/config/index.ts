@@ -8,5 +8,5 @@ export default {
   PORT: process.env.PORT,
   LOCAL_MONGO_URI: process.env.LOCAL_MONGO_URI,
   CLOUD_MONGO_URI: process.env.CLOUD_MONGO_URI,
-  JWT_ACCESS_SECRET: process.env.CLOUD_MONGO_URI_URL,
+  JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET,
 };
