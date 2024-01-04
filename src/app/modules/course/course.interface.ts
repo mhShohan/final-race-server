@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { IAcademicType, ISemesters, IYears } from "../../interfaces/interface";
+import { TAcademicType, TSemesters, TYears } from "../../interfaces/interface";
 
 export interface ICourse {
   title: string;
@@ -7,8 +7,8 @@ export interface ICourse {
   credit: number
   facultyId: Types.ObjectId
   departmentId: Types.ObjectId
-  year: IYears
-  semester: ISemesters
-  type: IAcademicType
+  year: TYears
+  semester: TSemesters
+  type: TAcademicType
 }
 
