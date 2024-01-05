@@ -35,6 +35,7 @@ Project Start - 31 December, 2023
 ### Admin
 
 - POST - /admins
+- POST - /admins/login
 - GET - /admins
 - GET - /admins/:id
 - PATCH - /admins/:id
