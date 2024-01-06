@@ -12,9 +12,9 @@ export interface IStudent {
   avatar: string;
   session: string;
   phone: string;
+  hallId: Types.ObjectId;
   facultyId: Types.ObjectId;
   departmentId: Types.ObjectId;
-  residentialHall: Types.ObjectId;
   educationalQualifications: Array<IEducationalQualification>;
   presentAddress: IAddress;
   permanentAddress: IAddress;
