@@ -39,3 +39,11 @@ Project Start - 31 December, 2023
 - GET - /admins
 - GET - /admins/:id
 - PATCH - /admins/:id
+
+### Student
+
+- POST - /students
+- POST - /students/login
+- GET - /students
+- GET - /students/:id
+- PATCH - /students/:id
