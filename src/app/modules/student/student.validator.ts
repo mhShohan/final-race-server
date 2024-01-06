@@ -60,7 +60,7 @@ export const updateSchema = z.object({
 });
 
 const loginSchema = z.object({
-  emailOrUserId: z.string(),
+  emailOrStudentId: z.string(),
   password: z.string()
 });
 
