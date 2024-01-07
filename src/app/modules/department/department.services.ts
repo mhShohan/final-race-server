@@ -4,6 +4,7 @@ import STATUS from "../../lib/httpStatus";
 import Faculty from "../faculty/faculty.model";
 import { IDepartment } from "./department.interface";
 import Department from "./department.model";
+import departmentAggregationPipelines from "./depertment.aggregation.pipelines";
 
 class DepartmentService {
   private model = Department
@@ -20,55 +21,13 @@ class DepartmentService {
     await this._isExists(id)
 
     return this.model.aggregate([
-      {
-        $match: {
-          _id: new Types.ObjectId(id)
-        }
-      },
-      {
-        $lookup: {
-          from: "faculties",
-          localField: "facultyId",
-          foreignField: "_id",
-          as: "faculty",
-        },
-      },
-      { $unwind: '$faculty' },
-      {
-        $project: {
-          name: 1,
-          shortName: 1,
-          facultyId: 1,
-          facultyName: '$faculty.name',
-          createdAt: 1,
-          updatedAt: 1
-        }
-      }
+      { $match: { _id: new Types.ObjectId(id) } },
+      ...departmentAggregationPipelines.mergeCollections()
     ])
   }
 
   async readAll() {
-    return this.model.aggregate([
-      {
-        $lookup: {
-          from: "faculties",
-          localField: "facultyId",
-          foreignField: "_id",
-          as: "faculty",
-        },
-      },
-      { $unwind: '$faculty' },
-      {
-        $project: {
-          name: 1,
-          shortName: 1,
-          facultyId: 1,
-          facultyName: '$faculty.name',
-          createdAt: 1,
-          updatedAt: 1
-        }
-      }
-    ])
+    return this.model.aggregate([...departmentAggregationPipelines.mergeCollections()])
   }
 
   async update(id: string, payload: Partial<IDepartment>) {

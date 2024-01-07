@@ -35,7 +35,7 @@ const getSingle = asyncHandler(async (req, res) => {
     success: true,
     statusCode: STATUS.OK,
     message: 'Student fetched Successfully',
-    data: result,
+    data: result[0],
   });
 });
 

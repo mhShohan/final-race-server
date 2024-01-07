@@ -9,12 +9,29 @@ const educationalQualificationSchema = z.object({
   GPA: z.number(),
 });
 
+const updateEducationalQualificationSchema = z.object({
+  name: z.string(),
+  passingYear: z.string(),
+  institute: z.string(),
+  board: z.string(),
+  roll: z.string(),
+  GPA: z.number(),
+});
+
 const addressSchema = z.object({
   village: z.string(),
   subDistrict: z.string(),
   postOffice: z.string(),
   district: z.string(),
   zipCode: z.string(),
+});
+
+const updateAddressSchema = z.object({
+  village: z.string().optional(),
+  subDistrict: z.string().optional(),
+  postOffice: z.string().optional(),
+  district: z.string().optional(),
+  zipCode: z.string().optional(),
 });
 
 export const createSchema = z.object({
@@ -52,9 +69,9 @@ export const updateSchema = z.object({
   hallId: z.string().optional(),
   facultyId: z.string().optional(),
   departmentId: z.string().optional(),
-  educationalQualifications: z.array(educationalQualificationSchema).optional(),
-  presentAddress: addressSchema.optional(),
-  permanentAddress: addressSchema.optional(),
+  educationalQualifications: z.array(updateEducationalQualificationSchema).optional(),
+  presentAddress: updateAddressSchema.optional(),
+  permanentAddress: updateAddressSchema.optional(),
   nationality: z.string().optional(),
   religion: z.string().optional(),
 });

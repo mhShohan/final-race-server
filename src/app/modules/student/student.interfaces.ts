@@ -31,6 +31,7 @@ export interface IEducationalQualification {
   board: string;
   roll: string;
   GPA: number;
+  isDelete?: boolean;
 }
 
 export interface IAddress {

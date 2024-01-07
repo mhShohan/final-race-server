@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Model } from "mongoose";
 import CustomError from "../errorHandler/customError";
 import STATUS from "../lib/httpStatus";
@@ -13,7 +14,6 @@ class BaseServices<T> {
     this.model = model
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async create(payload: any) {
     return this.model.create(payload)
   }
@@ -27,7 +27,7 @@ class BaseServices<T> {
     return this.model.find()
   }
 
-  async update<P extends Document>(id: string, payload: P) {
+  async update(id: string, payload: any) {
     await this._isExists(id)
     return this.model.findByIdAndUpdate(id, payload, { new: true, runValidators: true })
   }
