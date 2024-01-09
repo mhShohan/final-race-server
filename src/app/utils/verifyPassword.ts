@@ -1,12 +1,12 @@
-import bcrypt from 'bcrypt'
-import CustomError from '../errorHandler/customError'
+import bcrypt from 'bcrypt';
+import CustomError from '../errorHandler/customError';
 
 const verifyPassword = async (password: string, hashedPassword: string) => {
-  const matchedPassword = await bcrypt.compare(password, hashedPassword)
+  const matchedPassword = await bcrypt.compare(password, hashedPassword);
 
   if (!matchedPassword) {
-    throw new CustomError(400, 'Wrong Credentials!')
+    throw new CustomError(400, 'Wrong Credentials!');
   }
-}
+};
 
-export default verifyPassword
+export default verifyPassword;

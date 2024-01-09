@@ -1,5 +1,5 @@
-import { Types } from "mongoose"
-import { TStudentStatus } from "../../interfaces/interface"
+import { Types } from 'mongoose';
+import { TStudentStatus } from '../../interfaces/interface';
 
 export interface IStudent {
   studentId: string;

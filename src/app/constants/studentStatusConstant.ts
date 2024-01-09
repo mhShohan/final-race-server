@@ -3,6 +3,6 @@ const studentStatusConstant = {
   COMPLETED: 'COMPLETED',
   PENDING: 'PENDING',
   BLOCK: 'BLOCK',
-} as const
+} as const;
 
-export default studentStatusConstant
+export default studentStatusConstant;

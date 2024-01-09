@@ -38,7 +38,10 @@ export const createSchema = z.object({
   studentId: z.string(),
   name: z.string(),
   email: z.string().email(),
-  password: z.string().min(6, { message: 'Password must be contain atleast 6 characters!' }).max(20, { message: 'Password must be less than 20 characters!' }),
+  password: z
+    .string()
+    .min(6, { message: 'Password must be contain atleast 6 characters!' })
+    .max(20, { message: 'Password must be less than 20 characters!' }),
   dateOfBirth: z.string(),
   fatherName: z.string(),
   motherName: z.string(),
@@ -59,7 +62,11 @@ export const updateSchema = z.object({
   studentId: z.string().optional(),
   name: z.string().optional(),
   email: z.string().email().optional(),
-  password: z.string().min(6, { message: 'Password must be contain atleast 6 characters!' }).max(20, { message: 'Password must be less than 20 characters!' }).optional(),
+  password: z
+    .string()
+    .min(6, { message: 'Password must be contain atleast 6 characters!' })
+    .max(20, { message: 'Password must be less than 20 characters!' })
+    .optional(),
   dateOfBirth: z.string().optional(),
   fatherName: z.string().optional(),
   motherName: z.string().optional(),
@@ -78,9 +85,9 @@ export const updateSchema = z.object({
 
 const loginSchema = z.object({
   emailOrStudentId: z.string(),
-  password: z.string()
+  password: z.string(),
 });
 
-const studentValidator = { createSchema, updateSchema, loginSchema }
+const studentValidator = { createSchema, updateSchema, loginSchema };
 
-export default studentValidator
+export default studentValidator;

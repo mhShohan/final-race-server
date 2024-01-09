@@ -6,23 +6,20 @@ import courseAggregationPipelines from './course.aggregation.pipelines';
 
 class CourseService extends BaseServices<any> {
   constructor(model: any) {
-    super(model)
+    super(model);
   }
 
   async read(id: string) {
     return this.model.aggregate([
       { $match: { _id: new Types.ObjectId(id) } },
-      ...courseAggregationPipelines.mergeCollections()
-    ])
+      ...courseAggregationPipelines.mergeCollections(),
+    ]);
   }
   async readAll() {
-    return this.model.aggregate([...courseAggregationPipelines.mergeCollections()])
+    return this.model.aggregate([...courseAggregationPipelines.mergeCollections()]);
   }
 }
 
 const courseServices = new CourseService(Course);
 
 export default courseServices;
-
-
-
