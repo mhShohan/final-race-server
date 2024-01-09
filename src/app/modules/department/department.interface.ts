@@ -1,7 +1,7 @@
-import { Types } from "mongoose"
+import { Types } from 'mongoose';
 
 export interface IDepartment {
-  name: string
-  shortName: string
-  facultyId: Types.ObjectId
+  name: string;
+  shortName: string;
+  facultyId: Types.ObjectId;
 }

@@ -7,12 +7,12 @@ const courseSchema = new Schema<ICourse>(
     title: {
       type: String,
       required: [true, 'Course title is required!'],
-      unique: true
+      unique: true,
     },
     code: {
       type: String,
       required: [true, 'Course code is required!'],
-      unique: true
+      unique: true,
     },
     credit: {
       type: Number,
@@ -21,28 +21,28 @@ const courseSchema = new Schema<ICourse>(
     facultyId: {
       type: Schema.Types.ObjectId,
       required: [true, 'facultyId is required!'],
-      ref: 'faculty'
+      ref: 'faculty',
     },
     departmentId: {
       type: Schema.Types.ObjectId,
       required: [true, 'departmentId is required!'],
-      ref: 'department'
+      ref: 'department',
     },
     year: {
       type: String,
       enum: academicYear,
-      required: true
+      required: true,
     },
     semester: {
       type: String,
       enum: academicSemester,
-      required: true
+      required: true,
     },
     type: {
       type: String,
       enum: academicType,
-      required: true
-    }
+      required: true,
+    },
   },
   { timestamps: true },
 );

@@ -1,31 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Types } from "mongoose";
-import CustomError from "../../errorHandler/customError";
-import generateToken from "../../utils/generateToken";
-import verifyPassword from "../../utils/verifyPassword";
-import BaseServices from "../baseServices";
-import studentAggregationPipelines from "./student.aggregation.pipelines";
-import Student from "./student.model";
-import { IStudent } from "./student.interfaces";
+import { Types } from 'mongoose';
+import CustomError from '../../errorHandler/customError';
+import generateToken from '../../utils/generateToken';
+import verifyPassword from '../../utils/verifyPassword';
+import BaseServices from '../baseServices';
+import studentAggregationPipelines from './student.aggregation.pipelines';
+import Student from './student.model';
+import { IStudent } from './student.interfaces';
 
 class StudentService extends BaseServices<any> {
   constructor(model: any) {
-    super(model)
+    super(model);
   }
 
-  async login(payload: { emailOrStudentId: string, password: string }) {
-    const user = await this.model.findOne(
-      {
-        $or: [
-          { email: payload.emailOrStudentId },
-          { studentId: payload.emailOrStudentId }
-        ]
-      }
-    ).select('+password')
+  async login(payload: { emailOrStudentId: string; password: string }) {
+    const user = await this.model
+      .findOne({
+        $or: [{ email: payload.emailOrStudentId }, { studentId: payload.emailOrStudentId }],
+      })
+      .select('+password');
 
-    if (!user) throw new CustomError(400, 'Wrong Credentials!')
-    await verifyPassword(payload.password, user.password)
-    const token = generateToken({ _id: user._id, email: user.email, role: 'STUDENT' })
+    if (!user) throw new CustomError(400, 'Wrong Credentials!');
+    await verifyPassword(payload.password, user.password);
+    const token = generateToken({ _id: user._id, email: user.email, role: 'STUDENT' });
 
     return {
       token,
@@ -34,25 +31,25 @@ class StudentService extends BaseServices<any> {
         name: user.name,
         email: user.email,
         role: 'STUDENT',
-      }
-    }
+      },
+    };
   }
 
   async read(id: string) {
     return this.model.aggregate([
       { $match: { _id: new Types.ObjectId(id) } },
-      ...studentAggregationPipelines.mergeCollection()
-    ])
+      ...studentAggregationPipelines.mergeCollection(),
+    ]);
   }
   async readAll() {
-    return this.model.aggregate([...studentAggregationPipelines.mergeCollection()])
+    return this.model.aggregate([...studentAggregationPipelines.mergeCollection()]);
   }
 
   async update(id: string, payload: Partial<IStudent>): Promise<any> {
-    await this._isExists(id)
-    const { permanentAddress, presentAddress, ...restFields } = payload
+    await this._isExists(id);
+    const { permanentAddress, presentAddress, ...restFields } = payload;
 
-    const modifiedPayload: Record<string, unknown> = { ...restFields }
+    const modifiedPayload: Record<string, unknown> = { ...restFields };
 
     // Partial update permanent Address
     if (permanentAddress && Object.keys(permanentAddress).length) {
@@ -64,7 +61,7 @@ class StudentService extends BaseServices<any> {
     // Partial update present Address
     if (presentAddress && Object.keys(presentAddress).length) {
       for (const [key, value] of Object.entries(presentAddress)) {
-        modifiedPayload[`presentAddress.${key}`] = value
+        modifiedPayload[`presentAddress.${key}`] = value;
       }
     }
 
@@ -107,10 +104,10 @@ class StudentService extends BaseServices<any> {
     //   await session.endSession();
     // }
 
-    return this.model.findByIdAndUpdate(id, modifiedPayload, { new: true, runValidators: true })
+    return this.model.findByIdAndUpdate(id, modifiedPayload, { new: true, runValidators: true });
   }
 }
 
-const studentServices = new StudentService(Student)
+const studentServices = new StudentService(Student);
 
-export default studentServices
+export default studentServices;

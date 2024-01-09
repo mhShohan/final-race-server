@@ -8,7 +8,15 @@ const studentRoutes = Router();
 studentRoutes.get('/', studentControllers.getAll);
 studentRoutes.get('/:id', studentControllers.getSingle);
 studentRoutes.post('/', validateRequest(studentValidator.createSchema), studentControllers.create);
-studentRoutes.post('/login', validateRequest(studentValidator.loginSchema), studentControllers.login);
-studentRoutes.patch('/:id', validateRequest(studentValidator.updateSchema), studentControllers.update);
+studentRoutes.post(
+  '/login',
+  validateRequest(studentValidator.loginSchema),
+  studentControllers.login,
+);
+studentRoutes.patch(
+  '/:id',
+  validateRequest(studentValidator.updateSchema),
+  studentControllers.update,
+);
 
 export default studentRoutes;

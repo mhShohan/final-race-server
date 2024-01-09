@@ -12,33 +12,33 @@ const adminSchema = new Schema<IAdmin>(
     email: {
       type: String,
       required: [true, 'Admin email is required!'],
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
       required: [true, 'Admin password required!'],
-      select: 0
+      select: 0,
     },
     hallId: {
       type: Schema.Types.ObjectId,
-      ref: 'hall'
+      ref: 'hall',
     },
     departmentId: {
       type: Schema.Types.ObjectId,
-      ref: 'department'
+      ref: 'department',
     },
     role: {
       type: String,
       required: true,
       enum: adminRole,
-    }
+    },
   },
   { timestamps: true },
 );
 
 adminSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
-    this.password = await hashPassword(this.password)
+    this.password = await hashPassword(this.password);
   }
 
   next();

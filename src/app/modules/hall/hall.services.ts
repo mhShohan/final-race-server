@@ -4,7 +4,7 @@ import Hall from './hall.model';
 
 class HallService extends BaseServices<any> {
   constructor(model: any) {
-    super(model)
+    super(model);
   }
 }
 

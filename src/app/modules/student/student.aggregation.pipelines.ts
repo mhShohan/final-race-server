@@ -5,8 +5,8 @@ const mergeCollection = () => {
         from: 'faculties',
         localField: 'facultyId',
         foreignField: '_id',
-        as: 'faculty'
-      }
+        as: 'faculty',
+      },
     },
     { $unwind: '$faculty' },
     {
@@ -14,8 +14,8 @@ const mergeCollection = () => {
         from: 'departments',
         localField: 'departmentId',
         foreignField: '_id',
-        as: 'department'
-      }
+        as: 'department',
+      },
     },
     { $unwind: '$department' },
     { $unwind: '$faculty' },
@@ -24,8 +24,8 @@ const mergeCollection = () => {
         from: 'halls',
         localField: 'hallId',
         foreignField: '_id',
-        as: 'hall'
-      }
+        as: 'hall',
+      },
     },
     { $unwind: '$hall' },
     {
@@ -54,12 +54,11 @@ const mergeCollection = () => {
         departmentId: 1,
         department: '$department.name',
         departmentShortName: '$department.shortName',
-      }
-    }
-  ]
-}
+      },
+    },
+  ];
+};
 
+const studentAggregationPipelines = { mergeCollection };
 
-const studentAggregationPipelines = { mergeCollection }
-
-export default studentAggregationPipelines
+export default studentAggregationPipelines;

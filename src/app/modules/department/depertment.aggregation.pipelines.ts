@@ -2,10 +2,10 @@ const mergeCollections = () => {
   return [
     {
       $lookup: {
-        from: "faculties",
-        localField: "facultyId",
-        foreignField: "_id",
-        as: "faculty",
+        from: 'faculties',
+        localField: 'facultyId',
+        foreignField: '_id',
+        as: 'faculty',
       },
     },
     { $unwind: '$faculty' },
@@ -16,12 +16,12 @@ const mergeCollections = () => {
         facultyId: 1,
         facultyName: '$faculty.name',
         createdAt: 1,
-        updatedAt: 1
-      }
-    }
-  ]
-}
+        updatedAt: 1,
+      },
+    },
+  ];
+};
 
-const departmentAggregationPipelines = { mergeCollections }
+const departmentAggregationPipelines = { mergeCollections };
 
-export default departmentAggregationPipelines
+export default departmentAggregationPipelines;

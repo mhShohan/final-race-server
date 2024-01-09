@@ -12,48 +12,48 @@ import Admin from './admin.model';
 
 class AdminService extends BaseServices<any> {
   constructor(model: any) {
-    super(model)
+    super(model);
   }
 
   async create(payload: IAdmin) {
-
     if (payload.role === adminRoleConstant.CHAIRMAN && !payload.departmentId) {
       if (payload.departmentId) {
-        if (!await Department.findById(payload.departmentId)) {
-          throw new CustomError(404, 'Department is not found!')
+        if (!(await Department.findById(payload.departmentId))) {
+          throw new CustomError(404, 'Department is not found!');
         }
       }
 
-      throw new CustomError(400, 'To create a CHAIRMAN account must assign a department!')
-
+      throw new CustomError(400, 'To create a CHAIRMAN account must assign a department!');
     } else if (payload.role === adminRoleConstant.DEPARTMENT_OPERATOR && !payload.departmentId) {
       if (payload.departmentId) {
-        if (!await Department.findById(payload.departmentId)) {
-          throw new CustomError(404, 'Department is not found!')
+        if (!(await Department.findById(payload.departmentId))) {
+          throw new CustomError(404, 'Department is not found!');
         }
       }
 
-      throw new CustomError(400, 'To create a DEPARTMENT_OPERATOR account must assign a department!')
-
+      throw new CustomError(
+        400,
+        'To create a DEPARTMENT_OPERATOR account must assign a department!',
+      );
     } else if (payload.role === adminRoleConstant.HALL_OPERATOR && !payload.hallId) {
       if (payload.hallId) {
-        if (!await Hall.findById(payload.hallId)) {
-          throw new CustomError(400, 'Hall is not found!')
+        if (!(await Hall.findById(payload.hallId))) {
+          throw new CustomError(400, 'Hall is not found!');
         }
       }
 
-      throw new CustomError(404, 'To create a HALL_OPERATOR account must assign a hall!')
+      throw new CustomError(404, 'To create a HALL_OPERATOR account must assign a hall!');
     }
 
-    return this.model.create(payload)
+    return this.model.create(payload);
   }
 
-  async login(payload: { email: string, password: string }) {
-    const user = await this.model.findOne({ email: payload.email }).select('+password')
+  async login(payload: { email: string; password: string }) {
+    const user = await this.model.findOne({ email: payload.email }).select('+password');
 
-    if (!user) throw new CustomError(400, 'Wrong Credentials!')
-    await verifyPassword(payload.password, user.password)
-    const token = generateToken({ _id: user._id, email: user.email, role: user.role })
+    if (!user) throw new CustomError(400, 'Wrong Credentials!');
+    await verifyPassword(payload.password, user.password);
+    const token = generateToken({ _id: user._id, email: user.email, role: user.role });
 
     return {
       token,
@@ -62,8 +62,8 @@ class AdminService extends BaseServices<any> {
         name: user.name,
         email: user.email,
         role: user.role,
-      }
-    }
+      },
+    };
   }
 
   async read(id: string) {
@@ -71,31 +71,31 @@ class AdminService extends BaseServices<any> {
       { $match: { _id: new Types.ObjectId(id) } },
       {
         $lookup: {
-          from: "departments",
-          localField: "departmentId",
-          foreignField: "_id",
-          as: "department",
+          from: 'departments',
+          localField: 'departmentId',
+          foreignField: '_id',
+          as: 'department',
         },
       },
       {
         $lookup: {
-          from: "halls",
-          localField: "hallId",
-          foreignField: "_id",
-          as: "hall",
+          from: 'halls',
+          localField: 'hallId',
+          foreignField: '_id',
+          as: 'hall',
         },
       },
       {
         $unwind: {
           path: '$department',
-          preserveNullAndEmptyArrays: true
-        }
+          preserveNullAndEmptyArrays: true,
+        },
       },
       {
         $unwind: {
           path: '$hall',
-          preserveNullAndEmptyArrays: true
-        }
+          preserveNullAndEmptyArrays: true,
+        },
       },
       {
         $project: {
@@ -106,40 +106,39 @@ class AdminService extends BaseServices<any> {
           departmentId: '$department._id',
           hall: '$hall.name',
           hallId: '$hall._id',
-        }
-      }
-    ])
-
+        },
+      },
+    ]);
   }
   async readAll() {
     return this.model.aggregate([
       {
         $lookup: {
-          from: "departments",
-          localField: "departmentId",
-          foreignField: "_id",
-          as: "department",
+          from: 'departments',
+          localField: 'departmentId',
+          foreignField: '_id',
+          as: 'department',
         },
       },
       {
         $lookup: {
-          from: "halls",
-          localField: "hallId",
-          foreignField: "_id",
-          as: "hall",
+          from: 'halls',
+          localField: 'hallId',
+          foreignField: '_id',
+          as: 'hall',
         },
       },
       {
         $unwind: {
           path: '$department',
-          preserveNullAndEmptyArrays: true
-        }
+          preserveNullAndEmptyArrays: true,
+        },
       },
       {
         $unwind: {
           path: '$hall',
-          preserveNullAndEmptyArrays: true
-        }
+          preserveNullAndEmptyArrays: true,
+        },
       },
       {
         $project: {
@@ -150,15 +149,12 @@ class AdminService extends BaseServices<any> {
           departmentId: '$department._id',
           hall: '$hall.name',
           hallId: '$hall._id',
-        }
-      }
-    ])
+        },
+      },
+    ]);
   }
 }
 
 const adminServices = new AdminService(Admin);
 
 export default adminServices;
-
-
-

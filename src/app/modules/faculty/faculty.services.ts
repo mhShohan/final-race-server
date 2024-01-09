@@ -4,7 +4,7 @@ import Faculty from './faculty.model';
 
 class FacultyService extends BaseServices<any> {
   constructor(model: any) {
-    super(model)
+    super(model);
   }
 
   // async create(payload: IFaculty) {

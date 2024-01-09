@@ -23,5 +23,5 @@ const updateSchema = z.object({
   type: z.enum([...academicType] as [string, ...string[]]).optional(),
 });
 
-const courseValidator = { createSchema, updateSchema }
+const courseValidator = { createSchema, updateSchema };
 export default courseValidator;

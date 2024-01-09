@@ -5,16 +5,16 @@ const mergeCollections = () => {
         from: 'faculties',
         localField: 'facultyId',
         foreignField: '_id',
-        as: 'faculty'
-      }
+        as: 'faculty',
+      },
     },
     {
       $lookup: {
         from: 'departments',
         localField: 'departmentId',
         foreignField: '_id',
-        as: 'department'
-      }
+        as: 'department',
+      },
     },
     { $unwind: '$faculty' },
     { $unwind: '$department' },
@@ -29,12 +29,12 @@ const mergeCollections = () => {
         departmentId: '$department._id',
         year: 1,
         semester: 1,
-        type: 1
-      }
-    }
-  ]
-}
+        type: 1,
+      },
+    },
+  ];
+};
 
-const courseAggregationPipelines = { mergeCollections }
+const courseAggregationPipelines = { mergeCollections };
 
-export default courseAggregationPipelines
+export default courseAggregationPipelines;
