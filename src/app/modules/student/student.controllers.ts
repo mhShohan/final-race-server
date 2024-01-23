@@ -3,7 +3,7 @@ import STATUS from '../../lib/httpStatus';
 import sendResponse from '../../lib/sendResponse';
 import studentServices from './student.services';
 
-// Create
+// Create --- register new student
 const create = asyncHandler(async (req, res) => {
   const result = await studentServices.create(req.body);
 

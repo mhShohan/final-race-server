@@ -34,7 +34,17 @@ const updateAddressSchema = z.object({
   zipCode: z.string().optional(),
 });
 
-export const createSchema = z.object({
+const registerSchema = z.object({
+  studentId: z.string(),
+  name: z.string(),
+  email: z.string().email(),
+  password: z
+    .string()
+    .min(6, { message: 'Password must be contain atleast 6 characters!' })
+    .max(20, { message: 'Password must be less than 20 characters!' }),
+})
+
+const createSchema = z.object({
   studentId: z.string(),
   name: z.string(),
   email: z.string().email(),
@@ -58,7 +68,7 @@ export const createSchema = z.object({
   religion: z.string(),
 });
 
-export const updateSchema = z.object({
+const updateSchema = z.object({
   studentId: z.string().optional(),
   name: z.string().optional(),
   email: z.string().email().optional(),
@@ -88,6 +98,6 @@ const loginSchema = z.object({
   password: z.string(),
 });
 
-const studentValidator = { createSchema, updateSchema, loginSchema };
+const studentValidator = { createSchema, updateSchema, loginSchema, registerSchema };
 
 export default studentValidator;

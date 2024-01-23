@@ -8,4 +8,4 @@ export const adminRole = [
   'HALL_OPERATOR',
   'DEPARTMENT_OPERATOR',
 ];
-export const studentStatus = ['ACTIVE', 'COMPLETED', 'PENDING', 'BLOCK'];
+export const studentStatus = ['NOT_REQUESTED', 'PENDING', 'ACTIVE', 'CERTIFIED', 'BLOCK'];

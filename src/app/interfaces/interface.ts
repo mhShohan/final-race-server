@@ -7,7 +7,7 @@ export type TAdminRole =
   | 'CHAIRMAN'
   | 'HALL_OPERATOR'
   | 'DEPARTMENT_OPERATOR';
-export type TStudentStatus = 'ACTIVE' | 'COMPLETED' | 'PENDING' | 'BLOCK';
+export type TStudentStatus = 'NOT_REQUESTED' | 'ACTIVE' | 'COMPLETED' | 'PENDING' | 'BLOCK';
 
 export interface IJwtPayload {
   _id: string;
