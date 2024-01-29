@@ -42,7 +42,7 @@ const registerSchema = z.object({
     .string()
     .min(6, { message: 'Password must be contain atleast 6 characters!' })
     .max(20, { message: 'Password must be less than 20 characters!' }),
-})
+});
 
 const createSchema = z.object({
   studentId: z.string(),

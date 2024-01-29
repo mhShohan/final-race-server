@@ -1,12 +1,15 @@
-import asyncHandler from "../lib/asyncHandler";
-import STATUS from "../lib/httpStatus";
-import sendResponse from "../lib/sendResponse";
-import BaseServices from "./baseServices";
+import asyncHandler from '../lib/asyncHandler';
+import STATUS from '../lib/httpStatus';
+import sendResponse from '../lib/sendResponse';
+import BaseServices from './baseServices';
 
 class BaseController<T> {
-  constructor(protected services: BaseServices<T>, protected name: string) {
+  constructor(
+    protected services: BaseServices<T>,
+    protected name: string,
+  ) {
     this.services = services;
-    this.name = name
+    this.name = name;
   }
 
   public create = asyncHandler(async (req, res) => {
@@ -18,7 +21,7 @@ class BaseController<T> {
       message: `${this.name} Created Successfully`,
       data: result,
     });
-  })
+  });
 }
 
 export default BaseController;

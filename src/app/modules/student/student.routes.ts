@@ -7,7 +7,11 @@ const studentRoutes = Router();
 
 studentRoutes.get('/', studentControllers.getAll);
 studentRoutes.get('/:id', studentControllers.getSingle);
-studentRoutes.post('/register', validateRequest(studentValidator.registerSchema), studentControllers.create);
+studentRoutes.post(
+  '/register',
+  validateRequest(studentValidator.registerSchema),
+  studentControllers.create,
+);
 studentRoutes.post(
   '/login',
   validateRequest(studentValidator.loginSchema),
