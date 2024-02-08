@@ -3,6 +3,7 @@ import { Types } from 'mongoose';
 import BaseServices from '../baseServices';
 import Course from './course.model';
 import courseAggregationPipelines from './course.aggregation.pipelines';
+import paginatePipeline from '../../lib/paginate.pipeline';
 
 class CourseService extends BaseServices<any> {
   constructor(model: any) {
@@ -15,8 +16,31 @@ class CourseService extends BaseServices<any> {
       ...courseAggregationPipelines.mergeCollections(),
     ]);
   }
-  async readAll() {
-    return this.model.aggregate([...courseAggregationPipelines.mergeCollections()]);
+
+  async readAll(query: Record<string, unknown>) {
+    console.log(query);
+
+    const data = await this.model.aggregate([
+      ...courseAggregationPipelines.mergeCollections(),
+      ...courseAggregationPipelines.filterPipeline(query),
+      ...paginatePipeline(query)
+    ]);
+
+    const total = await this.model.aggregate([
+      ...courseAggregationPipelines.filterPipeline(query), {
+        $group: {
+          _id: null,
+          total: { $sum: 1 }
+        }
+      },
+      {
+        $project: {
+          _id: 0
+        }
+      }]
+    );
+
+    return { data, total }
   }
 }
 

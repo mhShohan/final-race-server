@@ -40,14 +40,23 @@ const getSingle = asyncHandler(async (req, res) => {
 });
 
 // get all
-const getAll = asyncHandler(async (_req, res) => {
-  const result = await courseServices.readAll();
+const getAll = asyncHandler(async (req, res) => {
+  const result = await courseServices.readAll(req.query);
+
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
 
   sendResponse(res, {
     success: true,
     statusCode: STATUS.OK,
     message: 'All Courses fetched Successfully',
-    data: result,
+    meta: {
+      page,
+      limit,
+      totalPage: Math.ceil(result.total[0]?.total / page),
+      totalCount: result.total[0]?.total || 0
+    },
+    data: result.data,
   });
 });
 

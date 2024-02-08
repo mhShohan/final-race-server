@@ -23,8 +23,8 @@ class BaseServices<T> {
     return this.model.findById(id);
   }
 
-  async readAll() {
-    return this.model.find();
+  async readAll(query: Record<string, unknown> = {}): Promise<any> {
+    return this.model.find(query);
   }
 
   async update(id: string, payload: any) {
