@@ -18,8 +18,6 @@ class CourseService extends BaseServices<any> {
   }
 
   async readAll(query: Record<string, unknown>) {
-    console.log(query);
-
     const data = await this.model.aggregate([
       ...courseAggregationPipelines.mergeCollections(),
       ...courseAggregationPipelines.filterPipeline(query),
