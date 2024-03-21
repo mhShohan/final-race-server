@@ -19,15 +19,15 @@ const paginatePipeline = (query: Record<string, unknown>) => {
   return [
     {
       $sort: {
-        [sortBy]: sortOrder
-      }
+        [sortBy]: sortOrder,
+      },
     },
     {
-      $skip: limit * (page - 1)
+      $skip: limit * (page - 1),
     },
     {
-      $limit: limit
-    }
+      $limit: limit,
+    },
   ];
 };
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Types } from "mongoose";
+import { Types } from 'mongoose';
 
 const mergeCollections = () => {
   return [
@@ -39,28 +39,28 @@ const mergeCollections = () => {
 };
 
 const filterPipeline = (query: Record<string, unknown>) => {
-  const fieldQueries: any = [{}]
+  const fieldQueries: any = [{}];
 
   if (query.department) {
-    fieldQueries.push({ departmentId: { $eq: new Types.ObjectId(query.department as string) } })
+    fieldQueries.push({ departmentId: { $eq: new Types.ObjectId(query.department as string) } });
   }
 
   if (query.year) {
-    fieldQueries.push({ year: { $eq: query.year } })
+    fieldQueries.push({ year: { $eq: query.year } });
   }
 
   if (query.semester) {
-    fieldQueries.push({ semester: { $eq: query.semester } })
+    fieldQueries.push({ semester: { $eq: query.semester } });
   }
 
   return [
     {
       $match: {
-        $and: [...fieldQueries]
-      }
-    }
+        $and: [...fieldQueries],
+      },
+    },
   ];
-}
+};
 
 const courseAggregationPipelines = { mergeCollections, filterPipeline };
 

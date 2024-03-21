@@ -21,24 +21,25 @@ class CourseService extends BaseServices<any> {
     const data = await this.model.aggregate([
       ...courseAggregationPipelines.mergeCollections(),
       ...courseAggregationPipelines.filterPipeline(query),
-      ...paginatePipeline(query)
+      ...paginatePipeline(query),
     ]);
 
     const total = await this.model.aggregate([
-      ...courseAggregationPipelines.filterPipeline(query), {
+      ...courseAggregationPipelines.filterPipeline(query),
+      {
         $group: {
           _id: null,
-          total: { $sum: 1 }
-        }
+          total: { $sum: 1 },
+        },
       },
       {
         $project: {
-          _id: 0
-        }
-      }]
-    );
+          _id: 0,
+        },
+      },
+    ]);
 
-    return { data, total }
+    return { data, total };
   }
 }
 

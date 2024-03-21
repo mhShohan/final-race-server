@@ -54,7 +54,7 @@ const getAll = asyncHandler(async (req, res) => {
       page,
       limit,
       totalPage: Math.ceil(result.total[0]?.total / limit),
-      totalCount: result.total[0]?.total || 0
+      totalCount: result.total[0]?.total || 0,
     },
     data: result.data,
   });
