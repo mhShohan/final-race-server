@@ -107,7 +107,6 @@ RegistrationInfo [color:blueviolet] {
   _id string pk
   facultyId ObjectId
   departmentId ObjectId
- 
   tuitionFee number
   transport number 
   library number 

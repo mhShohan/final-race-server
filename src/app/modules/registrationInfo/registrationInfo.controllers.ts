@@ -1,0 +1,49 @@
+import asyncHandler from '../../lib/asyncHandler';
+import STATUS from '../../lib/httpStatus';
+import sendResponse from '../../lib/sendResponse';
+import registrationInfoServices from './registrationInfo.services';
+
+class RegistrationInfoControllers {
+  private sendResponse = sendResponse;
+  private STATUS = STATUS;
+  private services = registrationInfoServices;
+
+  // Create
+  create = asyncHandler(async (req, res) => {
+    const result = await this.services.create(req.body);
+
+    this.sendResponse(res, {
+      success: true,
+      statusCode: this.STATUS.CREATED,
+      message: 'RegistrationInfo Created Successfully',
+      data: result,
+    });
+  })
+
+  // update
+  update = asyncHandler(async (req, res) => {
+    const result = await this.services.update(req.params.id, req.body);
+
+    this.sendResponse(res, {
+      success: true,
+      statusCode: this.STATUS.OK,
+      message: 'RegistrationInfo updated Successfully',
+      data: result,
+    });
+  })
+
+  // get one by id
+  getSingle = asyncHandler(async (req, res) => {
+    const result = await this.services.read(req.params.id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: 'RegistrationInfo fetched Successfully',
+      data: result,
+    });
+  })
+}
+
+const registrationInfoControllers = new RegistrationInfoControllers();
+export default registrationInfoControllers;
