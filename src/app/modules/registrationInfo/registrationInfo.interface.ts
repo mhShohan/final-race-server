@@ -3,6 +3,8 @@ import { Types } from "mongoose"
 export interface IRegistrationInfo {
   facultyId: Types.ObjectId
   departmentId: Types.ObjectId
+
+  // university fee
   tuitionFee: number
   transport: number
   library: number
@@ -15,4 +17,9 @@ export interface IRegistrationInfo {
   semesterExamFee: number
   admitCard: number
   othersFee: number
+
+  // departmental fee
+  centerFee: number
+  association: number
+  developmentFee: number
 }

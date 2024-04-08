@@ -119,6 +119,10 @@ RegistrationInfo [color:blueviolet] {
   semesterExamFee number
   admitCard number
   othersFee number
+  
+  centerFee number 
+  association number
+  developmentFee number
 }
 
 SemesterFeeForm [icon:apple-pay]{

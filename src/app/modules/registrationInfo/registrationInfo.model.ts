@@ -16,6 +16,9 @@ const RegistrationInfoSchema: Schema = new Schema<IRegistrationInfo>({
   semesterExamFee: { type: Number, required: true, default: 0 },
   admitCard: { type: Number, required: true, default: 0 },
   othersFee: { type: Number, required: true, default: 0 },
+  centerFee: { type: Number, required: true, default: 0 },
+  association: { type: Number, required: true, default: 0 },
+  developmentFee: { type: Number, required: true, default: 0 },
 }, { timestamps: true });
 
 const RegistrationInfo = model<IRegistrationInfo>('RegistrationInfo', RegistrationInfoSchema);

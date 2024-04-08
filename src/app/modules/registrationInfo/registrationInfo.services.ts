@@ -22,7 +22,7 @@ class RegistrationInfoServices {
 
   private async _isExists(id: string) {
     if (!(await this.model.findById(id))) {
-      throw new CustomError(STATUS.NOT_FOUND, 'RegistrationInfo is not found!', 'NOT_FOUND');
+      throw new CustomError(STATUS.NOT_FOUND, 'Registration Info is not found!', 'NOT_FOUND');
     }
   }
 }
