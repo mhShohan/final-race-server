@@ -13,6 +13,10 @@ const createSchema = z.object({
   semesterExamFee: z.number().min(0, { message: "Semester Exam Fee must be greater than or equal to 0" }),
   admitCard: z.number().min(0, { message: "Admit Card must be greater than or equal to 0" }),
   othersFee: z.number().min(0, { message: "Others Fee must be greater than or equal to 0" }),
+
+  centerFee: z.number().min(0, { message: "Center Fee must be greater than or equal to 0" }),
+  association: z.number().min(0, { message: "Association must be greater than or equal to 0" }),
+  developmentFee: z.number().min(0, { message: "Development Fee must be greater than or equal to 0" }),
 });
 
 const updateSchema = z.object({
@@ -28,6 +32,10 @@ const updateSchema = z.object({
   semesterExamFee: z.number().min(0, { message: "Semester Exam Fee must be greater than or equal to 0" }).optional(),
   admitCard: z.number().min(0, { message: "Admit Card must be greater than or equal to 0" }).optional(),
   othersFee: z.number().min(0, { message: "Others Fee must be greater than or equal to 0" }).optional(),
+
+  centerFee: z.number().min(0, { message: "Center Fee must be greater than or equal to 0" }).optional(),
+  association: z.number().min(0, { message: "Association must be greater than or equal to 0" }).optional(),
+  developmentFee: z.number().min(0, { message: "Development Fee must be greater than or equal to 0" }).optional(),
 });
 
 
