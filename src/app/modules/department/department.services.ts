@@ -1,10 +1,11 @@
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import CustomError from '../../errorHandler/customError';
 import STATUS from '../../lib/httpStatus';
 import Faculty from '../faculty/faculty.model';
 import { IDepartment } from './department.interface';
 import Department from './department.model';
 import departmentAggregationPipelines from './depertment.aggregation.pipelines';
+import RegistrationInfo from '../registrationInfo/registrationInfo.model';
 
 class DepartmentService {
   private model = Department;
@@ -14,7 +15,27 @@ class DepartmentService {
       throw new CustomError(STATUS.NOT_FOUND, 'Faculty is not found', 'NOT_FOUND');
     }
 
-    return this.model.create(payload);
+    let result;
+
+    const session = await mongoose.startSession();
+
+    try {
+      session.startTransaction();
+
+      result = await this.model.create([payload], { session });
+      await RegistrationInfo.create([{
+        departmentId: result[0]._id,
+        facultyId: result[0].facultyId
+      }], { session });
+
+      await session.commitTransaction()
+
+    } catch (error) {
+      await session.abortTransaction();
+    } finally {
+      await session.endSession();
+    }
+    return result
   }
 
   async read(id: string) {

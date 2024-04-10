@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 const createSchema = z.object({
+  departmentId: z.string(),
+  facultyId: z.string(),
   tuitionFee: z.number().min(0, { message: "Tuition Fee must be greater than 0" }),
   transport: z.number().min(0, { message: "Transport must be greater than or equal to 0" }),
   library: z.number().min(0, { message: "Library must be greater than or equal to 0" }),
@@ -36,6 +38,8 @@ const updateSchema = z.object({
   centerFee: z.number().min(0, { message: "Center Fee must be greater than or equal to 0" }).optional(),
   association: z.number().min(0, { message: "Association must be greater than or equal to 0" }).optional(),
   developmentFee: z.number().min(0, { message: "Development Fee must be greater than or equal to 0" }).optional(),
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
 });
 
 

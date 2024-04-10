@@ -11,7 +11,7 @@ const create = asyncHandler(async (req, res) => {
     success: true,
     statusCode: STATUS.CREATED,
     message: 'Department Created Successfully',
-    data: result,
+    data: result?.[0],
   });
 });
 
