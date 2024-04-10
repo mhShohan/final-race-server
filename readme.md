@@ -47,3 +47,9 @@ Project Start - 31 December, 2023
 - GET - /students
 - GET - /students/:id
 - PATCH - /students/:id
+
+## Registration Info
+
+- POST - /registration-info
+- PATCH - /registration-info/:id
+- GET - /registration-info/:id
