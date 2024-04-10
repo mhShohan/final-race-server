@@ -19,6 +19,8 @@ const RegistrationInfoSchema: Schema = new Schema<IRegistrationInfo>({
   centerFee: { type: Number, required: true, default: 0 },
   association: { type: Number, required: true, default: 0 },
   developmentFee: { type: Number, required: true, default: 0 },
+  startDate: { type: String },
+  endDate: { type: String },
 }, { timestamps: true });
 
 const RegistrationInfo = model<IRegistrationInfo>('RegistrationInfo', RegistrationInfoSchema);

@@ -7,6 +7,7 @@ class RegistrationInfoControllers {
   private sendResponse = sendResponse;
   private STATUS = STATUS;
   private services = registrationInfoServices;
+  private messageTitle = 'Registration Info';
 
   // Create
   create = asyncHandler(async (req, res) => {
@@ -15,7 +16,7 @@ class RegistrationInfoControllers {
     this.sendResponse(res, {
       success: true,
       statusCode: this.STATUS.CREATED,
-      message: 'RegistrationInfo Created Successfully',
+      message: `${this.messageTitle} Created Successfully`,
       data: result,
     });
   })
@@ -27,7 +28,7 @@ class RegistrationInfoControllers {
     this.sendResponse(res, {
       success: true,
       statusCode: this.STATUS.OK,
-      message: 'RegistrationInfo updated Successfully',
+      message: `${this.messageTitle} updated Successfully`,
       data: result,
     });
   })
@@ -39,7 +40,7 @@ class RegistrationInfoControllers {
     sendResponse(res, {
       success: true,
       statusCode: STATUS.OK,
-      message: 'RegistrationInfo fetched Successfully',
+      message: `${this.messageTitle} fetched Successfully`,
       data: result,
     });
   })

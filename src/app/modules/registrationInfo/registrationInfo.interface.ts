@@ -22,4 +22,8 @@ export interface IRegistrationInfo {
   centerFee: number
   association: number
   developmentFee: number
+
+  // date 
+  startDate: string
+  endDate: string
 }
