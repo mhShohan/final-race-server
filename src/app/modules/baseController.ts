@@ -7,9 +7,9 @@ class BaseController {
   private messageTitle: string;
 
   constructor(messageTitle: string) {
-    this.messageTitle = messageTitle
-    this.sendResponse = sendResponse
-    this.STATUS = STATUS
+    this.messageTitle = messageTitle;
+    this.sendResponse = sendResponse;
+    this.STATUS = STATUS;
   }
 }
 

@@ -4,7 +4,7 @@ import { IRegistrationInfo } from './registrationInfo.interface';
 import RegistrationInfo from './registrationInfo.model';
 
 class RegistrationInfoServices {
-  private model = RegistrationInfo
+  private model = RegistrationInfo;
 
   async create(payload: IRegistrationInfo) {
     return this.model.create(payload);

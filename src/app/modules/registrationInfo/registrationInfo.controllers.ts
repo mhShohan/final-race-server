@@ -19,7 +19,7 @@ class RegistrationInfoControllers {
       message: `${this.messageTitle} Created Successfully`,
       data: result,
     });
-  })
+  });
 
   // update
   update = asyncHandler(async (req, res) => {
@@ -31,7 +31,7 @@ class RegistrationInfoControllers {
       message: `${this.messageTitle} updated Successfully`,
       data: result,
     });
-  })
+  });
 
   // get one by id
   getSingle = asyncHandler(async (req, res) => {
@@ -43,7 +43,7 @@ class RegistrationInfoControllers {
       message: `${this.messageTitle} fetched Successfully`,
       data: result,
     });
-  })
+  });
 }
 
 const registrationInfoControllers = new RegistrationInfoControllers();

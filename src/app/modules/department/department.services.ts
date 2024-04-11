@@ -23,19 +23,23 @@ class DepartmentService {
       session.startTransaction();
 
       result = await this.model.create([payload], { session });
-      await RegistrationInfo.create([{
-        departmentId: result[0]._id,
-        facultyId: result[0].facultyId
-      }], { session });
+      await RegistrationInfo.create(
+        [
+          {
+            departmentId: result[0]._id,
+            facultyId: result[0].facultyId,
+          },
+        ],
+        { session },
+      );
 
-      await session.commitTransaction()
-
+      await session.commitTransaction();
     } catch (error) {
       await session.abortTransaction();
     } finally {
       await session.endSession();
     }
-    return result
+    return result;
   }
 
   async read(id: string) {
