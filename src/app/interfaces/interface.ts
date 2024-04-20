@@ -8,7 +8,8 @@ export type TAdminRole =
   | 'ADMIN'
   | 'CHAIRMAN'
   | 'HALL_OPERATOR'
-  | 'DEPARTMENT_OPERATOR';
+  | 'DEPARTMENT_OPERATOR'
+  | 'STUDENT';
 
 export type TStudentStatus = 'NOT_REQUESTED' | 'ACTIVE' | 'COMPLETED' | 'PENDING' | 'BLOCK';
 
