@@ -1,3 +1,5 @@
+import { JwtPayload } from "jsonwebtoken";
+
 export type TYears = '1st' | '2nd' | '3rd' | '4th' | '5th';
 export type TSemesters = '1st' | '2nd';
 export type TAcademicType = 'HONOURS' | 'MASTERS';
@@ -7,10 +9,12 @@ export type TAdminRole =
   | 'CHAIRMAN'
   | 'HALL_OPERATOR'
   | 'DEPARTMENT_OPERATOR';
+
 export type TStudentStatus = 'NOT_REQUESTED' | 'ACTIVE' | 'COMPLETED' | 'PENDING' | 'BLOCK';
 
-export interface IJwtPayload {
+export interface IJwtPayload extends JwtPayload {
   _id: string;
   email: string;
-  role: string;
+  role: TAdminRole;
 }
+
