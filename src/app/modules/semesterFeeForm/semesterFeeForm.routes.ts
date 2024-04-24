@@ -7,9 +7,10 @@ import verifyRole from '../../middlewares/verifyRole';
 
 const semesterFeeRoutes = Router();
 
+semesterFeeRoutes.use(verifyAuth);
+
 semesterFeeRoutes.post(
   '/',
-  verifyAuth,
   verifyRole(['STUDENT']),
   validateRequest(semesterFeeFormValidator.createSemesterFee),
   semesterFeeControllers.create,
@@ -17,19 +18,16 @@ semesterFeeRoutes.post(
 
 semesterFeeRoutes.get(
   '/:id',
-  verifyAuth,
   verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
   semesterFeeControllers.getSingle);
 
 semesterFeeRoutes.get(
   '/',
-  verifyAuth,
   verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
   semesterFeeControllers.getAll);
 
 semesterFeeRoutes.patch(
   '/:id',
-  verifyAuth,
   verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
   validateRequest(semesterFeeFormValidator.updateSemesterFee),
   semesterFeeControllers.update,

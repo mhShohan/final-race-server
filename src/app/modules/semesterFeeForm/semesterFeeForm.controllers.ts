@@ -11,7 +11,7 @@ class SemesterFeeControllers {
 
   // Create
   create = asyncHandler(async (req, res) => {
-    const result = await this.services.create(req.body);
+    const result = await this.services.create(req.body, req.user._id);
 
     this.sendResponse(res, {
       success: true,
