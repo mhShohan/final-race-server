@@ -1,6 +1,9 @@
 import { z } from "zod";
+import { academicSemester, academicYear } from "../../constants/constants";
 
 const createSemesterFee = z.object({
+  year: z.enum(academicYear as [string, ...string[]]),
+  semester: z.enum(academicSemester as [string, ...string[]]),
   tuitionFee: z.number().min(0, 'Tuition fee must be a positive number'),
   transport: z.number().min(0, 'Transport fee must be a positive number'),
   library: z.number().min(0, 'Library fee must be a positive number'),
@@ -16,6 +19,8 @@ const createSemesterFee = z.object({
 });
 
 const updateSemesterFee = z.object({
+  year: z.enum(academicYear as [string, ...string[]]).optional(),
+  semester: z.enum(academicSemester as [string, ...string[]]).optional(),
   tuitionFee: z.number().min(0, 'Tuition fee must be a positive number').optional(),
   transport: z.number().min(0, 'Transport fee must be a positive number').optional(),
   library: z.number().min(0, 'Library fee must be a positive number').optional(),
