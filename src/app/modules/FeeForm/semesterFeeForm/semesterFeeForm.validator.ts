@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { academicSemester, academicYear } from "../../constants/constants";
+import { academicSemester, academicYear } from "../../../constants/constants";
 
 const createSemesterFee = z.object({
   year: z.enum(academicYear as [string, ...string[]]),

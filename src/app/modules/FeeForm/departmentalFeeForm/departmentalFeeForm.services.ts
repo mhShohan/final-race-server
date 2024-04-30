@@ -1,9 +1,9 @@
 import { Types } from 'mongoose';
-import CustomError from '../../errorHandler/customError';
-import STATUS from '../../lib/httpStatus';
+import CustomError from '../../../errorHandler/customError';
+import STATUS from '../../../lib/httpStatus';
 import { IDepartmentalFeeForm } from './departmentalFeeForm.interfaces';
 import DepartmentalFeeForm from './departmentalFeeForm.model';
-import Student from '../student/student.model';
+import Student from '../../student/student.model';
 
 class DepartmentalFeeFormServices {
   private model = DepartmentalFeeForm;

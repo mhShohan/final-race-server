@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import { ISemesterFeeForm } from "./semesterFeeForm.interfaces";
-import { academicSemester, academicYear } from "../../constants/constants";
+import { academicSemester, academicYear } from "../../../constants/constants";
 
 const SemesterFeeSchema = new Schema<ISemesterFeeForm>({
   departmentId: { type: Schema.Types.ObjectId, required: true },

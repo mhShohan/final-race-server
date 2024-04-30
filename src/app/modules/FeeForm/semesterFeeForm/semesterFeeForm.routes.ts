@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import validateRequest from '../../middlewares/validateRequest';
 import semesterFeeFormValidator from './semesterFeeForm.validator';
 import semesterFeeControllers from './semesterFeeForm.controllers';
-import verifyAuth from '../../middlewares/verifyAuth';
-import verifyRole from '../../middlewares/verifyRole';
+import verifyAuth from '../../../middlewares/verifyAuth';
+import verifyRole from '../../../middlewares/verifyRole';
+import validateRequest from '../../../middlewares/validateRequest';
 
 const semesterFeeRoutes = Router();
 

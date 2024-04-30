@@ -1,9 +1,10 @@
-import CustomError from '../../errorHandler/customError';
-import STATUS from '../../lib/httpStatus';
+
 import SemesterFee from './semesterFeeForm.model';
 import { ISemesterFeeForm } from './semesterFeeForm.interfaces';
 import { Types } from 'mongoose';
-import Student from '../student/student.model';
+import Student from '../../student/student.model';
+import CustomError from '../../../errorHandler/customError';
+import STATUS from '../../../lib/httpStatus';
 
 class SemesterFeeServices {
   private model = SemesterFee;

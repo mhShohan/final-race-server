@@ -1,13 +1,13 @@
-import asyncHandler from '../../lib/asyncHandler';
-import STATUS from '../../lib/httpStatus';
-import sendResponse from '../../lib/sendResponse';
-import semesterFeeServices from './semesterFeeForm.services';
+import asyncHandler from '../../../lib/asyncHandler';
+import STATUS from '../../../lib/httpStatus';
+import sendResponse from '../../../lib/sendResponse';
+import residentialFeeFormServices from './residentialFeeForm.services';
 
-class SemesterFeeControllers {
+class ResidentialFeeFormControllers {
   private sendResponse = sendResponse;
   private STATUS = STATUS;
-  private services = semesterFeeServices;
-  private messageTitle = 'Semester Fee';
+  private services = residentialFeeFormServices;
+  private messageTitle = 'Residential Fee Form ';
 
   // Create
   create = asyncHandler(async (req, res) => {
@@ -58,5 +58,5 @@ class SemesterFeeControllers {
   });
 }
 
-const semesterFeeControllers = new SemesterFeeControllers();
-export default semesterFeeControllers;
+const residentialFeeFormControllers = new ResidentialFeeFormControllers();
+export default residentialFeeFormControllers;

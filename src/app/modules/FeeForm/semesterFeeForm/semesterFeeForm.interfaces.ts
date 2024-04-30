@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { TSemesters, TYears } from "../../interfaces/interface";
+import { TSemesters, TYears } from "../../../interfaces/interface";
 
 export interface ISemesterFeeForm {
   departmentId: Types.ObjectId;
