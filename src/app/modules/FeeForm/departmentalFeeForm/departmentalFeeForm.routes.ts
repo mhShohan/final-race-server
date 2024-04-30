@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import validateRequest from '../../middlewares/validateRequest';
-import verifyAuth from '../../middlewares/verifyAuth';
-import verifyRole from '../../middlewares/verifyRole';
+import validateRequest from '../../../middlewares/validateRequest';
+import verifyAuth from '../../../middlewares/verifyAuth';
+import verifyRole from '../../../middlewares/verifyRole';
 import departmentalFeeFormValidator from './departmentalFeeForm.validator';
 import departmentalFeeFormControllers from './departmentalFeeForm.controllers';
 

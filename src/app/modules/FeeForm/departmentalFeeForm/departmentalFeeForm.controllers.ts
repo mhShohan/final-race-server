@@ -1,6 +1,6 @@
-import asyncHandler from '../../lib/asyncHandler';
-import STATUS from '../../lib/httpStatus';
-import sendResponse from '../../lib/sendResponse';
+import asyncHandler from '../../../lib/asyncHandler';
+import STATUS from '../../../lib/httpStatus';
+import sendResponse from '../../../lib/sendResponse';
 import departmentalFeeFormServices from './departmentalFeeForm.services';
 
 class DepartmentalFeeFormControllers {

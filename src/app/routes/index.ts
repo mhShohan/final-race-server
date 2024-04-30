@@ -6,8 +6,9 @@ import facultyRoutes from '../modules/faculty/faculty.routes';
 import hallRoutes from '../modules/hall/hall.routes';
 import studentRoutes from '../modules/student/student.routes';
 import registrationInfoRoutes from '../modules/registrationInfo/registrationInfo.routes';
-import semesterFeeRoutes from '../modules/semesterFeeForm/semesterFeeForm.routes';
-import departmentalFeeFormRoutes from '../modules/departmentalFeeForm/departmentalFeeForm.routes';
+import departmentalFeeFormRoutes from '../modules/FeeForm/departmentalFeeForm/departmentalFeeForm.routes';
+import semesterFeeRoutes from '../modules/FeeForm/semesterFeeForm/semesterFeeForm.routes';
+import residentialFeeFormRoutes from '../modules/FeeForm/residentialFeeForm/residentialFeeForm.routes';
 
 const rootRoutes = Router();
 
@@ -20,5 +21,6 @@ rootRoutes.use('/students', studentRoutes);
 rootRoutes.use('/registration-info', registrationInfoRoutes);
 rootRoutes.use('/semester-fee-form', semesterFeeRoutes);
 rootRoutes.use('/departmental-fee-form', departmentalFeeFormRoutes);
+rootRoutes.use('/residential-fee-form', residentialFeeFormRoutes);
 
 export default rootRoutes;
