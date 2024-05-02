@@ -10,4 +10,6 @@ const monthDifference = (from: string, to: string) => {
   return months <= 0 ? 0 : months;
 }
 
-export default monthDifference
+// export default monthDifference
+
+monthDifference('2024-01-01', '2024-04-30')

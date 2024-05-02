@@ -4,7 +4,7 @@ const createSchema = z.object({
   form: z.string(),
   to: z.string(),
   fee: z.number().min(0, "Center fee must be greater than or equal to 0"),
-  othersFee: z.number().min(0, "Development fee must be greater than or equal to 0"),
+  othersFee: z.number().min(0, "Development fee must be greater than or equal to 0").optional(),
 });
 
 const updateSchema = z.object({

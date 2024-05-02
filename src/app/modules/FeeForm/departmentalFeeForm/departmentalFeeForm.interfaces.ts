@@ -10,6 +10,7 @@ export interface IDepartmentalFeeForm {
   association: number;
   developmentFee: number;
   amercementFee: number;
+  session: string;
 }
 
 
