@@ -6,6 +6,7 @@ export interface ISemesterFeeForm {
   studentId: Types.ObjectId;
   year: TYears
   semester: TSemesters;
+  session: string;
 
   tuitionFee: number;
   transport: number;

@@ -7,10 +7,12 @@ const departmentalFeeFormSchema = new Schema<IDepartmentalFeeForm>({
   studentId: { type: Schema.Types.ObjectId, required: true },
   year: { type: String, required: true, enum: academicYear },
   semester: { type: String, required: true, enum: academicSemester },
+  session: { type: String, required: true },
   centerFee: { type: Number, required: true },
   association: { type: Number, required: true },
   developmentFee: { type: Number, required: true },
   amercementFee: { type: Number },
+
 }, { timestamps: true });
 
 const DepartmentalFeeForm = model<IDepartmentalFeeForm>(

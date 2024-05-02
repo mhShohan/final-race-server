@@ -7,6 +7,7 @@ const SemesterFeeSchema = new Schema<ISemesterFeeForm>({
   studentId: { type: Schema.Types.ObjectId, required: true },
   year: { type: String, required: true, enum: academicYear },
   semester: { type: String, required: true, enum: academicSemester },
+  session: { type: String, required: true },
   tuitionFee: { type: Number, required: true },
   transport: { type: Number, required: true },
   library: { type: Number, required: true },
@@ -21,5 +22,5 @@ const SemesterFeeSchema = new Schema<ISemesterFeeForm>({
   othersFee: { type: Number },
 }, { timestamps: true });
 
-const SemesterFee = model<ISemesterFeeForm>('Semester-Fee', SemesterFeeSchema);
+const SemesterFee = model<ISemesterFeeForm>('Semester_Fee_form', SemesterFeeSchema);
 export default SemesterFee;

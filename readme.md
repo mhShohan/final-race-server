@@ -54,14 +54,25 @@ Project Start - 31 December, 2023
 - PATCH - /registration-info/:id
 - GET - /registration-info/:id
 
-## semester fee form Info
+## semester fee form
 
 - POST - /semester-fee-form
 - PATCH - /semester-fee-form/:id
 - GET - /semester-fee-form/:id
 
-## departmental fee form Info
+## departmental fee form
 
 - POST - /departmental-fee-form
 - PATCH - /departmental-fee-form/:id
 - GET - /departmental-fee-form/:id
+
+## residential fee form
+
+- POST - /residential-fee-form
+- PATCH - /residential-fee-form/:id
+- GET - /residential-fee-form/:id
+
+## fee form - create together
+
+- POST - /fee-form
+- GET - /fee-form
