@@ -51,6 +51,18 @@ const getAll = asyncHandler(async (_req, res) => {
   });
 });
 
+// get self profile
+const getSelf = asyncHandler(async (req, res) => {
+  const result = await studentServices.read(req.user._id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: STATUS.OK,
+    message: 'All Students fetched Successfully',
+    data: result,
+  });
+});
+
 // login
 const login = asyncHandler(async (req, res) => {
   const result = await studentServices.login(req.body);
@@ -63,6 +75,6 @@ const login = asyncHandler(async (req, res) => {
   });
 });
 
-const studentControllers = { create, update, getSingle, getAll, login };
+const studentControllers = { create, update, getSingle, getAll, login, getSelf };
 
 export default studentControllers;
