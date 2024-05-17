@@ -59,7 +59,7 @@ const getSelf = asyncHandler(async (req, res) => {
     success: true,
     statusCode: STATUS.OK,
     message: 'All Students fetched Successfully',
-    data: result,
+    data: result[0],
   });
 });
 
