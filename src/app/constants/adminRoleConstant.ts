@@ -5,4 +5,3 @@ export const adminRoleConstant = {
   HALL_OPERATOR: 'HALL_OPERATOR',
   DEPARTMENT_OPERATOR: 'DEPARTMENT_OPERATOR',
 } as const;
-

@@ -5,7 +5,6 @@ import { TAdminRole } from '../interfaces/interface';
 
 const verifyRole = (allowedRoles: TAdminRole[]) => {
   return (req: Request, _res: Response, next: NextFunction) => {
-
     const role: TAdminRole = req.user.role;
 
     if (allowedRoles.includes(role)) {

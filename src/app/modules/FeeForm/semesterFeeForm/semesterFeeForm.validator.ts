@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { academicSemester, academicYear } from "../../../constants/constants";
+import { z } from 'zod';
+import { academicSemester, academicYear } from '../../../constants/constants';
 
 const createSemesterFee = z.object({
   year: z.enum(academicYear as [string, ...string[]]),
@@ -35,9 +35,9 @@ const updateSemesterFee = z.object({
   othersFee: z.number().min(0, 'Others fee must be a positive number').optional(),
 });
 
-
 const semesterFeeFormValidator = {
-  createSemesterFee, updateSemesterFee
-}
+  createSemesterFee,
+  updateSemesterFee,
+};
 
-export default semesterFeeFormValidator
+export default semesterFeeFormValidator;

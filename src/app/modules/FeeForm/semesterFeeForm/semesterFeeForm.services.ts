@@ -1,4 +1,3 @@
-
 import SemesterFee from './semesterFeeForm.model';
 import { ISemesterFeeForm } from './semesterFeeForm.interfaces';
 import { Types } from 'mongoose';
@@ -10,7 +9,7 @@ class SemesterFeeServices {
   private model = SemesterFee;
 
   async create(payload: ISemesterFeeForm, userId: string) {
-    const student = await Student.findById(userId)
+    const student = await Student.findById(userId);
     if (!student) throw new CustomError(STATUS.NOT_FOUND, 'Student is not found!', 'NOT_FOUND');
 
     payload.departmentId = student?.departmentId as Types.ObjectId;

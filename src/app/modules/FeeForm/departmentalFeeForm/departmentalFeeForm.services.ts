@@ -9,7 +9,7 @@ class DepartmentalFeeFormServices {
   private model = DepartmentalFeeForm;
 
   async create(payload: IDepartmentalFeeForm, userId: string) {
-    const student = await Student.findById(userId)
+    const student = await Student.findById(userId);
     if (!student) throw new CustomError(STATUS.NOT_FOUND, 'Student is not found!', 'NOT_FOUND');
 
     payload.departmentId = student?.departmentId as Types.ObjectId;

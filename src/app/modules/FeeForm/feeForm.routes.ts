@@ -13,16 +13,9 @@ feeFromRoutes.post(
   '/',
   verifyRole(['STUDENT']),
   validateRequest(feeFormValidator.createSchema),
-  feeFormControllers.create
+  feeFormControllers.create,
 );
 
-
-feeFromRoutes.get(
-  '/',
-  verifyRole(['STUDENT']),
-  feeFormControllers.getAll
-);
-
-
+feeFromRoutes.get('/', verifyRole(['STUDENT']), feeFormControllers.getAll);
 
 export default feeFromRoutes;

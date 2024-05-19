@@ -1,15 +1,17 @@
-import { z } from "zod";
-import { academicSemester, academicYear } from "../../constants/constants";
-
+import { z } from 'zod';
+import { academicSemester, academicYear } from '../../constants/constants';
 
 const createSchema = z.object({
   year: z.enum(academicYear as [string, ...string[]]),
   semester: z.enum(academicSemester as [string, ...string[]]),
   departmentalFee: z.object({
-    centerFee: z.number().min(0, "Center fee must be greater than or equal to 0"),
-    association: z.number().min(0, "Association must be greater than or equal to 0"),
-    developmentFee: z.number().min(0, "Development fee must be greater than or equal to 0"),
-    amercementFee: z.number().min(0, "Amercement fee must be greater than or equal to 0").optional(),
+    centerFee: z.number().min(0, 'Center fee must be greater than or equal to 0'),
+    association: z.number().min(0, 'Association must be greater than or equal to 0'),
+    developmentFee: z.number().min(0, 'Development fee must be greater than or equal to 0'),
+    amercementFee: z
+      .number()
+      .min(0, 'Amercement fee must be greater than or equal to 0')
+      .optional(),
   }),
   semesterFee: z.object({
     tuitionFee: z.number().min(0, 'Tuition fee must be a positive number'),
@@ -25,16 +27,15 @@ const createSchema = z.object({
     admitCard: z.number().min(0, 'Admit card fee must be a positive number'),
     othersFee: z.number().min(0, 'Others fee must be a positive number').optional(),
   }),
-  residentialFee: z.object({
-    from: z.string(),
-    to: z.string(),
-    fee: z.number().min(0, "Center fee must be greater than or equal to 0"),
-    othersFee: z.number().min(0, "Development fee must be greater than or equal to 0").optional(),
-  }).optional()
-})
+  residentialFee: z
+    .object({
+      from: z.string(),
+      to: z.string(),
+      fee: z.number().min(0, 'Center fee must be greater than or equal to 0'),
+      othersFee: z.number().min(0, 'Development fee must be greater than or equal to 0').optional(),
+    })
+    .optional(),
+});
 
-
-
-
-const feeFormValidator = { createSchema }
-export default feeFormValidator
+const feeFormValidator = { createSchema };
+export default feeFormValidator;

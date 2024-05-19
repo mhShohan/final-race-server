@@ -19,12 +19,14 @@ semesterFeeRoutes.post(
 semesterFeeRoutes.get(
   '/:id',
   verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
-  semesterFeeControllers.getSingle);
+  semesterFeeControllers.getSingle,
+);
 
 semesterFeeRoutes.get(
   '/',
   verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
-  semesterFeeControllers.getAll);
+  semesterFeeControllers.getAll,
+);
 
 semesterFeeRoutes.patch(
   '/:id',

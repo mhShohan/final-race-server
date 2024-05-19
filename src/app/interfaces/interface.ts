@@ -1,4 +1,4 @@
-import { JwtPayload } from "jsonwebtoken";
+import { JwtPayload } from 'jsonwebtoken';
 
 export type TYears = '1st' | '2nd' | '3rd' | '4th' | '5th';
 export type TSemesters = '1st' | '2nd';
@@ -18,4 +18,3 @@ export interface IJwtPayload extends JwtPayload {
   email: string;
   role: TAdminRole;
 }
-

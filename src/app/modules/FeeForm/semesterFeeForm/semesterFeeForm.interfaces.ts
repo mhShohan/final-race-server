@@ -1,10 +1,10 @@
-import { Types } from "mongoose";
-import { TSemesters, TYears } from "../../../interfaces/interface";
+import { Types } from 'mongoose';
+import { TSemesters, TYears } from '../../../interfaces/interface';
 
 export interface ISemesterFeeForm {
   departmentId: Types.ObjectId;
   studentId: Types.ObjectId;
-  year: TYears
+  year: TYears;
   semester: TSemesters;
   session: string;
 
@@ -21,8 +21,3 @@ export interface ISemesterFeeForm {
   admitCard: number;
   othersFee?: number;
 }
-
-
-
-
-

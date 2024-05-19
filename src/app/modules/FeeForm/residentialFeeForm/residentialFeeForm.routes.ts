@@ -19,12 +19,14 @@ residentialFeeFormRoutes.post(
 residentialFeeFormRoutes.get(
   '/:id',
   verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
-  residentialFeeFormControllers.getSingle);
+  residentialFeeFormControllers.getSingle,
+);
 
 residentialFeeFormRoutes.get(
   '/',
   verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
-  residentialFeeFormControllers.getAll);
+  residentialFeeFormControllers.getAll,
+);
 
 residentialFeeFormRoutes.patch(
   '/:id',

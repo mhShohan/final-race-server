@@ -1,10 +1,10 @@
-import { Types } from "mongoose";
-import { TSemesters, TYears } from "../../../interfaces/interface";
+import { Types } from 'mongoose';
+import { TSemesters, TYears } from '../../../interfaces/interface';
 
 export interface IDepartmentalFeeForm {
   departmentId: Types.ObjectId;
   studentId: Types.ObjectId;
-  year: TYears
+  year: TYears;
   semester: TSemesters;
   centerFee: number;
   association: number;
@@ -12,5 +12,3 @@ export interface IDepartmentalFeeForm {
   amercementFee: number;
   session: string;
 }
-
-

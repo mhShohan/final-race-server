@@ -19,12 +19,14 @@ departmentalFeeFormRoutes.post(
 departmentalFeeFormRoutes.get(
   '/:id',
   verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
-  departmentalFeeFormControllers.getSingle);
+  departmentalFeeFormControllers.getSingle,
+);
 
 departmentalFeeFormRoutes.get(
   '/',
   verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
-  departmentalFeeFormControllers.getAll);
+  departmentalFeeFormControllers.getAll,
+);
 
 departmentalFeeFormRoutes.patch(
   '/:id',
