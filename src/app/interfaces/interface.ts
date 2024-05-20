@@ -11,7 +11,7 @@ export type TAdminRole =
   | 'DEPARTMENT_OPERATOR'
   | 'STUDENT';
 
-export type TStudentStatus = 'NOT_REQUESTED' | 'ACTIVE' | 'COMPLETED' | 'PENDING' | 'BLOCK';
+export type TStudentStatus = 'NOT_REQUESTED' | 'ACTIVE' | 'PENDING' | 'BLOCK' | 'REQUESTED' | 'CERTIFIED' | 'REJECTED';
 
 export interface IJwtPayload extends JwtPayload {
   _id: string;

@@ -10,6 +10,8 @@ import Hall from '../hall/hall.model';
 import { IAdmin } from './admin.interface';
 import Admin from './admin.model';
 import Student from '../student/student.model';
+import { TStudentStatus } from '../../interfaces/interface';
+import httpStatus from 'http-status';
 
 class AdminService extends BaseServices<any> {
   constructor(model: any) {
@@ -159,30 +161,33 @@ class AdminService extends BaseServices<any> {
     const admin = await this.model.findById(id);
     if (!admin) throw new CustomError(404, 'Admin not found!');
 
-    const students = await Student.find({ departmentId: admin.departmentId });
-
-    return students
+    return await Student.find({ departmentId: admin.departmentId });
   }
 
   async reviewRequest(id: string) {
     const admin = await this.model.findById(id);
     if (!admin) throw new CustomError(404, 'Admin not found!');
 
-    const students = await Student.find({ departmentId: admin.departmentId, isVerified: false, status: 'REQUESTED' });
-
-    return students
+    return await Student.find({ departmentId: admin.departmentId, isVerified: false, status: 'REQUESTED' });
   }
 
   //change Student Request status
-  async verifyStudentRequest(id: string, studentId: string, payload: { status: 'PENDING' | 'ACTIVE' | 'CERTIFIED' | 'BLOCK' }) {
+  async verifyStudentRequest(id: string, studentId: string, payload: { status: TStudentStatus }) {
     const admin = await this.model.findById(id);
-    if (!admin) throw new CustomError(404, 'Admin not found!');
+    if (!admin) throw new CustomError(httpStatus.NOT_FOUND, 'Admin not found!');
 
-    await Student.findByIdAndUpdate(studentId, { isVerified: true, status: payload.status });
+    const data = {
+      status: payload.status,
+      isVerified: false
+    }
 
+    if (payload.status === 'ACTIVE' || payload.status === 'CERTIFIED') {
+      data.isVerified = true
+    }
+
+    await Student.findByIdAndUpdate(studentId, data, { new: true });
   }
 }
 
 const adminServices = new AdminService(Admin);
-
 export default adminServices;
