@@ -10,7 +10,7 @@ const educationalQualificationSchema = new Schema<IEducationalQualification>(
     institute: { type: String, required: true },
     board: { type: String, required: true },
     roll: { type: String, required: true },
-    GPA: { type: Number, required: true },
+    GPA: { type: String, required: true, trim: true },
   },
   { _id: false },
 );

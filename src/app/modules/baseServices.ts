@@ -38,9 +38,13 @@ class BaseServices<T> {
   }
 
   protected async _isExists(id: string) {
-    if (!(await this.model.findById(id))) {
+    const result = await this.model.findById(id)
+
+    if (!result) {
       throw new CustomError(STATUS.NOT_FOUND, 'Data is not found!', 'NOT_FOUND');
     }
+
+    return result
   }
 }
 

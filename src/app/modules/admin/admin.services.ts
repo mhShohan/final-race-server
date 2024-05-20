@@ -9,6 +9,7 @@ import Department from '../department/department.model';
 import Hall from '../hall/hall.model';
 import { IAdmin } from './admin.interface';
 import Admin from './admin.model';
+import Student from '../student/student.model';
 
 class AdminService extends BaseServices<any> {
   constructor(model: any) {
@@ -152,6 +153,33 @@ class AdminService extends BaseServices<any> {
         },
       },
     ]);
+  }
+
+  async getAllStudent(id: string) {
+    const admin = await this.model.findById(id);
+    if (!admin) throw new CustomError(404, 'Admin not found!');
+
+    const students = await Student.find({ departmentId: admin.departmentId });
+
+    return students
+  }
+
+  async reviewRequest(id: string) {
+    const admin = await this.model.findById(id);
+    if (!admin) throw new CustomError(404, 'Admin not found!');
+
+    const students = await Student.find({ departmentId: admin.departmentId, isVerified: false, status: 'REQUESTED' });
+
+    return students
+  }
+
+  //change Student Request status
+  async verifyStudentRequest(id: string, studentId: string, payload: { status: 'PENDING' | 'ACTIVE' | 'CERTIFIED' | 'BLOCK' }) {
+    const admin = await this.model.findById(id);
+    if (!admin) throw new CustomError(404, 'Admin not found!');
+
+    await Student.findByIdAndUpdate(studentId, { isVerified: true, status: payload.status });
+
   }
 }
 

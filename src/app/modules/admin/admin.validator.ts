@@ -31,5 +31,9 @@ const updateSchema = z.object({
   role: z.enum([...adminRole] as [string, ...string[]]).optional(),
 });
 
-const adminValidator = { createSchema, updateSchema, loginSchema };
+const verifyStudentRequestSchema = z.object({
+  status: z.enum(['PENDING', 'ACTIVE', 'CERTIFIED', 'BLOCK']),
+})
+
+const adminValidator = { createSchema, updateSchema, loginSchema, verifyStudentRequestSchema };
 export default adminValidator;

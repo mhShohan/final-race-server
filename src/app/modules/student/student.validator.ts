@@ -15,7 +15,7 @@ const updateEducationalQualificationSchema = z.object({
   institute: z.string(),
   board: z.string(),
   roll: z.string(),
-  GPA: z.number(),
+  GPA: z.string(),
 });
 
 const addressSchema = z.object({

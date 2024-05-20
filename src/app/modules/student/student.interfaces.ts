@@ -30,7 +30,7 @@ export interface IEducationalQualification {
   institute: string;
   board: string;
   roll: string;
-  GPA: number;
+  GPA: string;
   isDelete?: boolean;
 }
 

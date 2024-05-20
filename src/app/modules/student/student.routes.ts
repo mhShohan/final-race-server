@@ -10,6 +10,8 @@ studentRoutes.get('/', studentControllers.getAll);
 studentRoutes.get('/self', verifyAuth, studentControllers.getSelf);
 studentRoutes.get('/:id', studentControllers.getSingle);
 
+studentRoutes.post('/verify', verifyAuth, studentControllers.verifyAccountRequest);
+
 studentRoutes.post(
   '/register',
   validateRequest(studentValidator.registerSchema),

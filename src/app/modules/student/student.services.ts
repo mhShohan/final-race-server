@@ -64,7 +64,8 @@ class StudentService extends BaseServices<any> {
         modifiedPayload[`presentAddress.${key}`] = value;
       }
     }
-
+    modifiedPayload.status = 'REQUESTED'
+    modifiedPayload.isVerified = false
     // const session = await mongoose.startSession()
 
     // try {
@@ -105,6 +106,14 @@ class StudentService extends BaseServices<any> {
     // }
 
     return this.model.findByIdAndUpdate(id, modifiedPayload, { new: true, runValidators: true });
+  }
+
+  async verifyAccountRequest(id: string) {
+    const student = await this._isExists(id);
+    if (student.status === 'PENDING') throw new CustomError(400, 'Your profile is under reviewing!');
+    if (student.status !== 'REQUESTED') throw new CustomError(400, 'Update Your Profile with all information!');
+
+    return this.model.findByIdAndUpdate(id, { status: 'PENDING' }, { new: true });
   }
 }
 
