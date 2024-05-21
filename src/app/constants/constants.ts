@@ -7,5 +7,6 @@ export const adminRole = [
   'CHAIRMAN',
   'HALL_OPERATOR',
   'DEPARTMENT_OPERATOR',
+  'STUDENT',
 ];
 export const studentStatus = ['NOT_REQUESTED', 'REQUESTED', 'PENDING', 'REJECTED', 'ACTIVE', 'CERTIFIED', 'BLOCK'];

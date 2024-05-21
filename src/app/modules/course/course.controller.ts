@@ -1,11 +1,14 @@
+import { Types } from 'mongoose';
 import asyncHandler from '../../lib/asyncHandler';
 import STATUS from '../../lib/httpStatus';
 import sendResponse from '../../lib/sendResponse';
+import Student from '../student/student.model';
 import courseServices from './course.services';
+import Admin from '../admin/admin.model';
 
 // Create
 const create = asyncHandler(async (req, res) => {
-  const result = await courseServices.create(req.body);
+  const result = await courseServices.create(req.body, req.user._id);
 
   sendResponse(res, {
     success: true,
@@ -41,7 +44,21 @@ const getSingle = asyncHandler(async (req, res) => {
 
 // get all
 const getAll = asyncHandler(async (req, res) => {
-  const result = await courseServices.readAll(req.query);
+  const query: Record<string, unknown> = req.query;
+
+  if (req?.user?._id) {
+    if (req.user.role === 'STUDENT') {
+      const student = await Student.findById(req.user._id);
+      query.departmentId = student?.departmentId as Types.ObjectId;
+    } else {
+      const admin = await Admin.findById(req.user._id);
+      if (admin?.departmentId) {
+        query.departmentId = admin?.departmentId as Types.ObjectId;
+      }
+    }
+  }
+
+  const result = await courseServices.readAll(query);
 
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;

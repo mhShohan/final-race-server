@@ -14,7 +14,8 @@ class BaseServices<T> {
     this.model = model;
   }
 
-  async create(payload: any) {
+  async create(payload: any, userId?: string) {
+    console.log(userId)
     return this.model.create(payload);
   }
 

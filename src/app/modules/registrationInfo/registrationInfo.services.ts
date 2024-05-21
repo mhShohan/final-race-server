@@ -1,5 +1,6 @@
 import CustomError from '../../errorHandler/customError';
 import STATUS from '../../lib/httpStatus';
+import Admin from '../admin/admin.model';
 import { IRegistrationInfo } from './registrationInfo.interface';
 import RegistrationInfo from './registrationInfo.model';
 
@@ -11,8 +12,34 @@ class RegistrationInfoServices {
   }
 
   async read(id: string) {
-    await this._isExists(id);
-    return this.model.findById(id);
+    const admin = await Admin.findById(id);
+    if (!admin) throw new CustomError(STATUS.NOT_FOUND, 'Admin is not found!', 'NOT_FOUND');
+
+    return await this.model.findOne({ departmentId: admin?.departmentId });
+  }
+
+  async checkStatus(id: string) {
+    const admin = await Admin.findById(id);
+    if (!admin) throw new CustomError(STATUS.NOT_FOUND, 'Admin is not found!', 'NOT_FOUND');
+
+    const registrationInfo = await this.model.findOne({ departmentId: admin?.departmentId });
+
+    const today = new Date()
+    const endDate = new Date(registrationInfo?.endDate as string)
+
+    if (today >= endDate) {
+      return {
+        startDate: registrationInfo?.startDate,
+        endDate: registrationInfo?.endDate,
+        status: 'Closed'
+      }
+    } else {
+      return {
+        startDate: registrationInfo?.startDate,
+        endDate: registrationInfo?.endDate,
+        status: 'Ongoing'
+      }
+    }
   }
 
   async update(id: string, payload: Partial<IRegistrationInfo>) {
