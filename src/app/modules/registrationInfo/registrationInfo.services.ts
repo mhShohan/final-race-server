@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import CustomError from '../../errorHandler/customError';
 import STATUS from '../../lib/httpStatus';
 import Admin from '../admin/admin.model';
@@ -18,11 +19,8 @@ class RegistrationInfoServices {
     return await this.model.findOne({ departmentId: admin?.departmentId });
   }
 
-  async checkStatus(id: string) {
-    const admin = await Admin.findById(id);
-    if (!admin) throw new CustomError(STATUS.NOT_FOUND, 'Admin is not found!', 'NOT_FOUND');
-
-    const registrationInfo = await this.model.findOne({ departmentId: admin?.departmentId });
+  async checkStatus(id: Types.ObjectId) {
+    const registrationInfo = await this.model.findOne({ departmentId: id });
 
     const today = new Date()
     const endDate = new Date(registrationInfo?.endDate as string)

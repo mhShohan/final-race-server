@@ -18,13 +18,13 @@ registrationInfoRoutes.post(
 
 registrationInfoRoutes.get(
   '/',
-  verifyRole([adminRoleConstant.CHAIRMAN, adminRoleConstant.DEPARTMENT_OPERATOR]),
+  verifyRole([adminRoleConstant.CHAIRMAN, adminRoleConstant.DEPARTMENT_OPERATOR, adminRoleConstant.STUDENT]),
   registrationInfoControllers.getSingle
 );
 
 registrationInfoRoutes.get(
   '/status',
-  verifyRole([adminRoleConstant.CHAIRMAN, adminRoleConstant.DEPARTMENT_OPERATOR]),
+  verifyRole([adminRoleConstant.CHAIRMAN, adminRoleConstant.DEPARTMENT_OPERATOR, adminRoleConstant.STUDENT]),
   registrationInfoControllers.checkStatus
 );
 
