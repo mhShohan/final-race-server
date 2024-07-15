@@ -86,6 +86,13 @@ class FeeFormServices {
     //   }
     // }
   }
+
+  async readOne(id: string) {
+    return await FeeForm.findById(id)
+      .populate('departmentalFeeId')
+      .populate('residentialFeeId')
+      .populate('semesterFeeId');
+  }
 }
 
 const feeFormServices = new FeeFormServices();

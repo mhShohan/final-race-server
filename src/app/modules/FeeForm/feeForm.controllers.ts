@@ -32,6 +32,18 @@ class FeeFormControllers {
       data: result,
     });
   });
+
+  // get single
+  getSingle = asyncHandler(async (req, res) => {
+    const result = await this.services.readOne(req.params.id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} fetched Successfully`,
+      data: result,
+    });
+  });
 }
 
 const feeFormControllers = new FeeFormControllers();

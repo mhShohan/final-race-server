@@ -4,6 +4,7 @@ import STATUS from '../../lib/httpStatus';
 import Admin from '../admin/admin.model';
 import { IRegistrationInfo } from './registrationInfo.interface';
 import RegistrationInfo from './registrationInfo.model';
+import Student from '../student/student.model';
 
 class RegistrationInfoServices {
   private model = RegistrationInfo;
@@ -14,9 +15,12 @@ class RegistrationInfoServices {
 
   async read(id: string) {
     const admin = await Admin.findById(id);
-    if (!admin) throw new CustomError(STATUS.NOT_FOUND, 'Admin is not found!', 'NOT_FOUND');
+    const student = await Student.findById(id);
 
-    return await this.model.findOne({ departmentId: admin?.departmentId });
+    if (!admin && !student) throw new CustomError(STATUS.NOT_FOUND, 'Admin or Student is not found!', 'NOT_FOUND');
+    const departmentId = admin?.departmentId || student?.departmentId;
+
+    return await this.model.findOne({ departmentId });
   }
 
   async checkStatus(id: Types.ObjectId) {
