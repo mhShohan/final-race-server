@@ -8,6 +8,7 @@ export interface ISemesterFeeForm {
   semester: TSemesters;
   session: string;
 
+  creditFee: number;
   tuitionFee: number;
   transport: number;
   library: number;

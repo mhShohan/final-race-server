@@ -17,6 +17,7 @@ export interface IRegistrationInfo {
   semesterExamFee: number;
   admitCard: number;
   othersFee: number;
+  creditFee: number;
 
   // departmental fee
   centerFee: number;

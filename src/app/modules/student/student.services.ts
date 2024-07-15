@@ -30,6 +30,7 @@ class StudentService extends BaseServices<any> {
         _id: user._id,
         name: user.name,
         email: user.email,
+        departmentId: user.departmentId,
         role: 'STUDENT',
       },
     };

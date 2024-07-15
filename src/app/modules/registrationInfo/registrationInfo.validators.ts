@@ -6,6 +6,7 @@ const createSchema = z.object({
   tuitionFee: z.number().min(0, { message: 'Tuition Fee must be greater than 0' }),
   transport: z.number().min(0, { message: 'Transport must be greater than or equal to 0' }),
   library: z.number().min(0, { message: 'Library must be greater than or equal to 0' }),
+  creditFee: z.number().min(0, { message: 'Credit Fee must be greater than 0' }),
   centralSports: z
     .number()
     .min(0, { message: 'Central Sports must be greater than or equal to 0' }),

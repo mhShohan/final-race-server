@@ -13,6 +13,7 @@ const SemesterFeeSchema = new Schema<ISemesterFeeForm>(
     transport: { type: Number, required: true },
     library: { type: Number, required: true },
     centralSports: { type: Number, required: true },
+    creditFee: { type: Number, required: true },
     studentWelfare: { type: Number, required: true },
     treatment: { type: Number, required: true },
     roverScout: { type: Number, required: true },

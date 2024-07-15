@@ -11,6 +11,7 @@ const createSemesterFee = z.object({
   studentWelfare: z.number().min(0, 'Student welfare fee must be a positive number'),
   treatment: z.number().min(0, 'Treatment fee must be a positive number'),
   roverScout: z.number().min(0, 'Rover scout fee must be a positive number'),
+  creditFee: z.number().min(0, 'credit fee must be a positive number'),
   BNCC: z.number().min(0, 'BNCC fee must be a positive number'),
   computerFee: z.number().min(0, 'Computer fee must be a positive number'),
   semesterExamFee: z.number().min(0, 'Semester exam fee must be a positive number'),

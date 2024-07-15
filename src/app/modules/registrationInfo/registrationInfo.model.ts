@@ -15,6 +15,7 @@ const RegistrationInfoSchema: Schema = new Schema<IRegistrationInfo>(
     BNCC: { type: Number, required: true, default: 0 },
     computerFee: { type: Number, required: true, default: 0 },
     semesterExamFee: { type: Number, required: true, default: 0 },
+    creditFee: { type: Number, required: true },
     admitCard: { type: Number, required: true, default: 0 },
     othersFee: { type: Number, required: true, default: 0 },
     centerFee: { type: Number, required: true, default: 0 },
