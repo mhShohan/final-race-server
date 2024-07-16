@@ -27,6 +27,7 @@ const createSchema = z.object({
     admitCard: z.number().min(0, 'Admit card fee must be a positive number'),
     othersFee: z.number().min(0, 'Others fee must be a positive number').optional(),
   }),
+  courses: z.array(z.object({})),
   residentialFee: z
     .object({
       from: z.string(),

@@ -1,4 +1,5 @@
 import { TSemesters, TYears } from '../../interfaces/interface';
+import { ICourse } from '../course/course.interface';
 import { IDepartmentalFeeForm } from './departmentalFeeForm/departmentalFeeForm.interfaces';
 import { IResidentialFeeForm } from './residentialFeeForm/residentialFeeForm.interface';
 import { ISemesterFeeForm } from './semesterFeeForm/semesterFeeForm.interfaces';
@@ -9,4 +10,5 @@ export interface IFeeForm {
   departmentalFee: IDepartmentalFeeForm;
   semesterFee: ISemesterFeeForm;
   residentialFee?: IResidentialFeeForm;
+  courses: ICourse[];
 }

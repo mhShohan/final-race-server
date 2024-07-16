@@ -11,7 +11,7 @@ import FeeForm, { IFeeFormRelation } from './feeFrom.model';
 
 class FeeFormServices {
   async create(payload: IFeeForm, userId: string) {
-    const { year, semester, semesterFee, departmentalFee, residentialFee } = payload;
+    const { year, semester, semesterFee, departmentalFee, residentialFee, courses } = payload;
 
     const student = await Student.findById(userId);
     if (!student) throw new CustomError(STATUS.NOT_FOUND, 'Student is not found!', 'NOT_FOUND');
@@ -51,6 +51,7 @@ class FeeFormServices {
       const feeFromPayload: IFeeFormRelation = {
         departmentalFeeId: result.departmentalFeeFrom[0]._id,
         semesterFeeId: result.semesterFeeForm[0]._id,
+        courses,
       };
 
       if (residentialFee) {
