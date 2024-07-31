@@ -4,8 +4,12 @@ import SemesterFee from './semesterFeeForm/semesterFeeForm.model';
 import ResidentialFeeForm from './residentialFeeForm/residentialFeeForm.model';
 import { academicSemester, academicType, academicYear } from '../../constants/constants';
 import { ICourse } from '../course/course.interface';
+import { TSemesters, TYears } from '../../interfaces/interface';
 
 export interface IFeeFormRelation {
+  year: TYears;
+  semester: TSemesters;
+  studentId: Types.ObjectId;
   departmentalFeeId: Types.ObjectId;
   semesterFeeId: Types.ObjectId;
   residentialFeeId?: Types.ObjectId;
@@ -27,6 +31,9 @@ const courseSchema = new Schema({
 
 const FeeFormSchema = new Schema<IFeeFormRelation>(
   {
+    semester: { type: String, enum: academicSemester, required: true },
+    year: { type: String, enum: academicYear, required: true },
+    studentId: { type: Schema.Types.ObjectId, required: true, ref: 'student' },
     departmentalFeeId: { type: Schema.Types.ObjectId, required: true, ref: DepartmentalFeeForm },
     semesterFeeId: { type: Schema.Types.ObjectId, required: true, ref: SemesterFee },
     residentialFeeId: { type: Schema.Types.ObjectId, ref: ResidentialFeeForm },

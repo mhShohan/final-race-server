@@ -36,6 +36,7 @@ const createSchema = z.object({
       othersFee: z.number().min(0, 'Development fee must be greater than or equal to 0').optional(),
     })
     .optional(),
+  studentId: z.string({ required_error: 'Student id is required!' }),
 });
 
 const feeFormValidator = { createSchema };
