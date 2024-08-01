@@ -85,7 +85,15 @@ const verifyAccountRequest = asyncHandler(async (req, res) => {
     message: 'Your profile is requested to review by department',
     data: result,
   });
-})
+});
 
-const studentControllers = { create, update, getSingle, getAll, login, getSelf, verifyAccountRequest };
+const studentControllers = {
+  create,
+  update,
+  getSingle,
+  getAll,
+  login,
+  getSelf,
+  verifyAccountRequest,
+};
 export default studentControllers;

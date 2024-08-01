@@ -33,7 +33,7 @@ const updateSchema = z.object({
 
 const verifyStudentRequestSchema = z.object({
   status: z.enum(['PENDING', 'ACTIVE', 'CERTIFIED', 'REJECTED', 'BLOCK']),
-})
+});
 
 const adminValidator = { createSchema, updateSchema, loginSchema, verifyStudentRequestSchema };
 export default adminValidator;

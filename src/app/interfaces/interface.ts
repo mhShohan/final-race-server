@@ -11,7 +11,14 @@ export type TAdminRole =
   | 'DEPARTMENT_OPERATOR'
   | 'STUDENT';
 
-export type TStudentStatus = 'NOT_REQUESTED' | 'ACTIVE' | 'PENDING' | 'BLOCK' | 'REQUESTED' | 'CERTIFIED' | 'REJECTED';
+export type TStudentStatus =
+  | 'NOT_REQUESTED'
+  | 'ACTIVE'
+  | 'PENDING'
+  | 'BLOCK'
+  | 'REQUESTED'
+  | 'CERTIFIED'
+  | 'REJECTED';
 
 export interface IJwtPayload extends JwtPayload {
   _id: string;
@@ -19,14 +26,13 @@ export interface IJwtPayload extends JwtPayload {
   role: TAdminRole;
 }
 
-
-export type ISemesterFeeFormStatus = 'submitted' |
-  'approved_by_chairman' |
-  'rejected_by_chairman' |
-  'approved_by_hall_authority' |
-  'rejected_by_hall_authority' |
-  'approved_by_bank_accountant' |
-  'rejected_by_bank_accountant' |
-  'approved_by_exam_controller' |
-  'rejected_by_exam_controller';
-
+export type ISemesterFeeFormStatus =
+  | 'submitted'
+  | 'approved_by_chairman'
+  | 'rejected_by_chairman'
+  | 'approved_by_hall_authority'
+  | 'rejected_by_hall_authority'
+  | 'approved_by_bank_accountant'
+  | 'rejected_by_bank_accountant'
+  | 'approved_by_exam_controller'
+  | 'rejected_by_exam_controller';

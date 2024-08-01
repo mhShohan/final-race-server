@@ -16,7 +16,15 @@ feeFromRoutes.post(
   feeFormControllers.create,
 );
 
-feeFromRoutes.get('/', verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']), feeFormControllers.getAll);
-feeFromRoutes.get('/:id', verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']), feeFormControllers.getAll);
+feeFromRoutes.get(
+  '/',
+  verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  feeFormControllers.getAll,
+);
+feeFromRoutes.get(
+  '/:id',
+  verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  feeFormControllers.getAll,
+);
 
 export default feeFromRoutes;

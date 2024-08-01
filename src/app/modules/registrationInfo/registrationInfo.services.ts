@@ -17,7 +17,8 @@ class RegistrationInfoServices {
     const admin = await Admin.findById(id);
     const student = await Student.findById(id);
 
-    if (!admin && !student) throw new CustomError(STATUS.NOT_FOUND, 'Admin or Student is not found!', 'NOT_FOUND');
+    if (!admin && !student)
+      throw new CustomError(STATUS.NOT_FOUND, 'Admin or Student is not found!', 'NOT_FOUND');
     const departmentId = admin?.departmentId || student?.departmentId;
 
     return await this.model.findOne({ departmentId });
@@ -26,21 +27,21 @@ class RegistrationInfoServices {
   async checkStatus(id: Types.ObjectId) {
     const registrationInfo = await this.model.findOne({ departmentId: id });
 
-    const today = new Date()
-    const endDate = new Date(registrationInfo?.endDate as string)
+    const today = new Date();
+    const endDate = new Date(registrationInfo?.endDate as string);
 
     if (today >= endDate) {
       return {
         startDate: registrationInfo?.startDate,
         endDate: registrationInfo?.endDate,
-        status: 'Closed'
-      }
+        status: 'Closed',
+      };
     } else {
       return {
         startDate: registrationInfo?.startDate,
         endDate: registrationInfo?.endDate,
-        status: 'Ongoing'
-      }
+        status: 'Ongoing',
+      };
     }
   }
 

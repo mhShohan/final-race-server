@@ -168,7 +168,11 @@ class AdminService extends BaseServices<any> {
     const admin = await this.model.findById(id);
     if (!admin) throw new CustomError(404, 'Admin not found!');
 
-    return await Student.find({ departmentId: admin.departmentId, isVerified: false, status: 'REQUESTED' });
+    return await Student.find({
+      departmentId: admin.departmentId,
+      isVerified: false,
+      status: 'REQUESTED',
+    });
   }
 
   //change Student Request status
@@ -178,11 +182,11 @@ class AdminService extends BaseServices<any> {
 
     const data = {
       status: payload.status,
-      isVerified: false
-    }
+      isVerified: false,
+    };
 
     if (payload.status === 'ACTIVE' || payload.status === 'CERTIFIED') {
-      data.isVerified = true
+      data.isVerified = true;
     }
 
     await Student.findByIdAndUpdate(studentId, data, { new: true });

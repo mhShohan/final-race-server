@@ -15,7 +15,7 @@ class BaseServices<T> {
   }
 
   async create(payload: any, userId?: string) {
-    console.log(userId)
+    console.log(userId);
     return this.model.create(payload);
   }
 
@@ -39,13 +39,13 @@ class BaseServices<T> {
   }
 
   protected async _isExists(id: string) {
-    const result = await this.model.findById(id)
+    const result = await this.model.findById(id);
 
     if (!result) {
       throw new CustomError(STATUS.NOT_FOUND, 'Data is not found!', 'NOT_FOUND');
     }
 
-    return result
+    return result;
   }
 }
 

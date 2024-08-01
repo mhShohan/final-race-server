@@ -8,15 +8,30 @@ import { adminRoleConstant } from '../../constants/adminRoleConstant';
 
 const courseRoutes = Router();
 
-courseRoutes.use(verifyAuth)
+courseRoutes.use(verifyAuth);
 
-courseRoutes.get('/', verifyRole([
-  adminRoleConstant.SUPER_ADMIN,
-  adminRoleConstant.ADMIN,
-  adminRoleConstant.DEPARTMENT_OPERATOR,
-  adminRoleConstant.STUDENT]), courseControllers.getAll);
+courseRoutes.get(
+  '/',
+  verifyRole([
+    adminRoleConstant.SUPER_ADMIN,
+    adminRoleConstant.ADMIN,
+    adminRoleConstant.DEPARTMENT_OPERATOR,
+    adminRoleConstant.STUDENT,
+  ]),
+  courseControllers.getAll,
+);
 courseRoutes.get('/:id', courseControllers.getSingle);
-courseRoutes.post('/', verifyRole([adminRoleConstant.DEPARTMENT_OPERATOR]), validateRequest(courseValidator.createSchema), courseControllers.create);
-courseRoutes.patch('/:id', verifyRole([adminRoleConstant.DEPARTMENT_OPERATOR]), validateRequest(courseValidator.updateSchema), courseControllers.update);
+courseRoutes.post(
+  '/',
+  verifyRole([adminRoleConstant.DEPARTMENT_OPERATOR]),
+  validateRequest(courseValidator.createSchema),
+  courseControllers.create,
+);
+courseRoutes.patch(
+  '/:id',
+  verifyRole([adminRoleConstant.DEPARTMENT_OPERATOR]),
+  validateRequest(courseValidator.updateSchema),
+  courseControllers.update,
+);
 
 export default courseRoutes;

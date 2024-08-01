@@ -9,7 +9,15 @@ export const adminRole = [
   'DEPARTMENT_OPERATOR',
   'STUDENT',
 ];
-export const studentStatus = ['NOT_REQUESTED', 'REQUESTED', 'PENDING', 'REJECTED', 'ACTIVE', 'CERTIFIED', 'BLOCK'];
+export const studentStatus = [
+  'NOT_REQUESTED',
+  'REQUESTED',
+  'PENDING',
+  'REJECTED',
+  'ACTIVE',
+  'CERTIFIED',
+  'BLOCK',
+];
 
 export const semesterFeeFormStatus = [
   'submitted',
@@ -20,5 +28,5 @@ export const semesterFeeFormStatus = [
   'approved_by_bank_accountant',
   'rejected_by_bank_accountant',
   'approved_by_exam_controller',
-  'rejected_by_exam_controller'
-]
+  'rejected_by_exam_controller',
+];

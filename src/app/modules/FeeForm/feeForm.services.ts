@@ -51,7 +51,9 @@ class FeeFormServices {
       const feeFromPayload: IFeeFormRelation = {
         departmentalFeeId: result.departmentalFeeFrom[0]._id,
         semesterFeeId: result.semesterFeeForm[0]._id,
-        courses, year, semester,
+        courses,
+        year,
+        semester,
         studentId: student._id as Types.ObjectId,
       };
 

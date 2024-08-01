@@ -8,7 +8,7 @@ import { adminRoleConstant } from '../../constants/adminRoleConstant';
 
 const registrationInfoRoutes = Router();
 
-registrationInfoRoutes.use(verifyAuth)
+registrationInfoRoutes.use(verifyAuth);
 
 registrationInfoRoutes.post(
   '/',
@@ -18,14 +18,22 @@ registrationInfoRoutes.post(
 
 registrationInfoRoutes.get(
   '/',
-  verifyRole([adminRoleConstant.CHAIRMAN, adminRoleConstant.DEPARTMENT_OPERATOR, adminRoleConstant.STUDENT]),
-  registrationInfoControllers.getSingle
+  verifyRole([
+    adminRoleConstant.CHAIRMAN,
+    adminRoleConstant.DEPARTMENT_OPERATOR,
+    adminRoleConstant.STUDENT,
+  ]),
+  registrationInfoControllers.getSingle,
 );
 
 registrationInfoRoutes.get(
   '/status',
-  verifyRole([adminRoleConstant.CHAIRMAN, adminRoleConstant.DEPARTMENT_OPERATOR, adminRoleConstant.STUDENT]),
-  registrationInfoControllers.checkStatus
+  verifyRole([
+    adminRoleConstant.CHAIRMAN,
+    adminRoleConstant.DEPARTMENT_OPERATOR,
+    adminRoleConstant.STUDENT,
+  ]),
+  registrationInfoControllers.checkStatus,
 );
 
 registrationInfoRoutes.patch(

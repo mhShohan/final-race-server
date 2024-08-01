@@ -97,6 +97,15 @@ const verifyStudentRequest = asyncHandler(async (req, res) => {
   });
 });
 
-const adminControllers = { create, update, getSingle, getAll, login, allStudents, reviewRequest, verifyStudentRequest };
+const adminControllers = {
+  create,
+  update,
+  getSingle,
+  getAll,
+  login,
+  allStudents,
+  reviewRequest,
+  verifyStudentRequest,
+};
 
 export default adminControllers;
