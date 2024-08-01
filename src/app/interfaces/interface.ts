@@ -18,3 +18,15 @@ export interface IJwtPayload extends JwtPayload {
   email: string;
   role: TAdminRole;
 }
+
+
+export type ISemesterFeeFormStatus = 'submitted' |
+  'approved_by_chairman' |
+  'rejected_by_chairman' |
+  'approved_by_hall_authority' |
+  'rejected_by_hall_authority' |
+  'approved_by_bank_accountant' |
+  'rejected_by_bank_accountant' |
+  'approved_by_exam_controller' |
+  'rejected_by_exam_controller';
+

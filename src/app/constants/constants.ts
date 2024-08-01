@@ -10,3 +10,15 @@ export const adminRole = [
   'STUDENT',
 ];
 export const studentStatus = ['NOT_REQUESTED', 'REQUESTED', 'PENDING', 'REJECTED', 'ACTIVE', 'CERTIFIED', 'BLOCK'];
+
+export const semesterFeeFormStatus = [
+  'submitted',
+  'approved_by_chairman',
+  'rejected_by_chairman',
+  'approved_by_hall_authority',
+  'rejected_by_hall_authority',
+  'approved_by_bank_accountant',
+  'rejected_by_bank_accountant',
+  'approved_by_exam_controller',
+  'rejected_by_exam_controller'
+]
