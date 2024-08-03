@@ -20,6 +20,7 @@ export interface IFeeFormRelation {
   residentialFeeId?: Types.ObjectId;
   courses: ICourse[];
   status: ISemesterFeeFormStatus;
+  declineMessage?: string;
 }
 
 const courseSchema = new Schema(
