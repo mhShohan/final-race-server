@@ -56,6 +56,7 @@ const FeeFormSchema = new Schema<IFeeFormRelation>(
     residentialFeeId: { type: Schema.Types.ObjectId, ref: ResidentialFeeForm },
     courses: [courseSchema],
     status: { type: String, enum: semesterFeeFormStatus, required: true },
+    declineMessage: { type: String },
   },
   { timestamps: true },
 );

@@ -55,6 +55,7 @@ class FeeFormServices {
         year,
         semester,
         studentId: student._id as Types.ObjectId,
+        status: 'submitted'
       };
 
       if (residentialFee) {
