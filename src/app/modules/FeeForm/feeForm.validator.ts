@@ -8,10 +8,6 @@ const createSchema = z.object({
     centerFee: z.number().min(0, 'Center fee must be greater than or equal to 0'),
     association: z.number().min(0, 'Association must be greater than or equal to 0'),
     developmentFee: z.number().min(0, 'Development fee must be greater than or equal to 0'),
-    amercementFee: z
-      .number()
-      .min(0, 'Amercement fee must be greater than or equal to 0')
-      .optional(),
   }),
   semesterFee: z.object({
     tuitionFee: z.number().min(0, 'Tuition fee must be a positive number'),
@@ -27,16 +23,8 @@ const createSchema = z.object({
     admitCard: z.number().min(0, 'Admit card fee must be a positive number'),
     othersFee: z.number().min(0, 'Others fee must be a positive number').optional(),
   }),
-  courses: z.array(z.object({})),
-  residentialFee: z
-    .object({
-      from: z.string(),
-      to: z.string(),
-      fee: z.number().min(0, 'Center fee must be greater than or equal to 0'),
-      othersFee: z.number().min(0, 'Development fee must be greater than or equal to 0').optional(),
-    })
-    .optional(),
-  studentId: z.string({ required_error: 'Student id is required!' }),
+  courses: z.array(z.any()),
+  examType: z.enum(['Regular', 'Retake', 'Improvement'])
 });
 
 const feeFormValidator = { createSchema };

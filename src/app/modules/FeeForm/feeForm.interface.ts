@@ -9,6 +9,7 @@ export interface IFeeForm {
   semester: TSemesters;
   departmentalFee: IDepartmentalFeeForm;
   semesterFee: ISemesterFeeForm;
-  residentialFee?: IResidentialFeeForm;
+  residentialFee: IResidentialFeeForm;
+  examType: 'Regular' | 'Retake' | 'Improvement';
   courses: ICourse[];
 }

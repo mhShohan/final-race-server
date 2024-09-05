@@ -19,6 +19,7 @@ export interface IFeeFormRelation {
   semesterFeeId: Types.ObjectId;
   residentialFeeId?: Types.ObjectId;
   courses: ICourse[];
+  examType: 'Regular' | 'Retake' | 'Improvement';
   status: ISemesterFeeFormStatus;
   declineMessage?: string;
 }
@@ -55,6 +56,7 @@ const FeeFormSchema = new Schema<IFeeFormRelation>(
     semesterFeeId: { type: Schema.Types.ObjectId, required: true, ref: SemesterFee },
     residentialFeeId: { type: Schema.Types.ObjectId, ref: ResidentialFeeForm },
     courses: [courseSchema],
+    examType: { type: String, enum: ['Regular', 'Retake', 'Improvement'], required: true },
     status: { type: String, enum: semesterFeeFormStatus, required: true },
     declineMessage: { type: String },
   },
