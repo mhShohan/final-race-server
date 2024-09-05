@@ -7,6 +7,7 @@ import { IFeeForm } from './feeForm.interface';
 import FeeForm, { IFeeFormRelation } from './feeFrom.model';
 import ResidentialFeeForm from './residentialFeeForm/residentialFeeForm.model';
 import SemesterFee from './semesterFeeForm/semesterFeeForm.model';
+import Admin from '../admin/admin.model';
 
 class FeeFormServices {
   async create(payload: IFeeForm, userId: string) {
@@ -84,17 +85,27 @@ class FeeFormServices {
     }
   }
 
-  async readAll() {
-    return await FeeForm.find()
+  async readAll(user: { role: string; _id: string }) {
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query: Record<string, any> = {};
+    if (user.role === 'STUDENT') {
+      query.studentId = user._id;
+    }
+
+    /// if CHAIRMAN then show only submitted forms and only for his department
+    if (user.role === 'CHAIRMAN') {
+      const admin = await Admin.findById(user._id);
+      if (!admin) throw new CustomError(STATUS.NOT_FOUND, 'Admin is not found!', 'NOT_FOUND');
+
+      query.departmentalFeeId.departmentId = admin.departmentId;
+      query.status = 'submitted';
+    }
+
+    return await FeeForm.find(query)
       .populate('departmentalFeeId')
       .populate('residentialFeeId')
       .populate('semesterFeeId');
-
-    // private async _isExists(id: string) {
-    //   if (!(await this.model.findById(id))) {
-    //     throw new CustomError(STATUS.NOT_FOUND, 'Departmental Fee is not found!', 'NOT_FOUND');
-    //   }
-    // }
   }
 
   async readOne(id: string) {

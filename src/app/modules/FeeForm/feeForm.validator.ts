@@ -8,10 +8,6 @@ const createSchema = z.object({
     centerFee: z.number().min(0, 'Center fee must be greater than or equal to 0'),
     association: z.number().min(0, 'Association must be greater than or equal to 0'),
     developmentFee: z.number().min(0, 'Development fee must be greater than or equal to 0'),
-    amercementFee: z
-      .number()
-      .min(0, 'Amercement fee must be greater than or equal to 0')
-      .optional(),
   }),
   semesterFee: z.object({
     tuitionFee: z.number().min(0, 'Tuition fee must be a positive number'),

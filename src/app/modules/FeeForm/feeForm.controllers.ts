@@ -22,8 +22,8 @@ class FeeFormControllers {
   });
 
   // get all
-  getAll = asyncHandler(async (_req, res) => {
-    const result = await this.services.readAll();
+  getAll = asyncHandler(async (req, res) => {
+    const result = await this.services.readAll(req.user);
 
     sendResponse(res, {
       success: true,
