@@ -33,6 +33,32 @@ class FeeFormControllers {
     });
   });
 
+  // getAllByChairman
+  getAllByChairman = asyncHandler(async (req, res) => {
+    const result = await this.services.getAllByChairman(req.user._id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} fetched Successfully`,
+      data: result,
+    });
+  });
+
+  // getAllByChairman
+  updateAndAccept = asyncHandler(async (req, res) => {
+    const payload = { status: req.body.status, declineMessage: req.body.declineMessage }
+
+    const result = await this.services.updateAndAccept(req.params.id, payload);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} fetched Successfully`,
+      data: result,
+    });
+  });
+
   // get single
   getSingle = asyncHandler(async (req, res) => {
     const result = await this.services.readOne(req.params.id);

@@ -15,6 +15,7 @@ export interface IFeeFormRelation {
   year: TYears;
   semester: TSemesters;
   studentId: Types.ObjectId;
+  departmentId: Types.ObjectId;
   departmentalFeeId: Types.ObjectId;
   semesterFeeId: Types.ObjectId;
   residentialFeeId?: Types.ObjectId;
@@ -52,6 +53,7 @@ const FeeFormSchema = new Schema<IFeeFormRelation>(
     semester: { type: String, enum: academicSemester, required: true },
     year: { type: String, enum: academicYear, required: true },
     studentId: { type: Schema.Types.ObjectId, required: true, ref: 'student' },
+    departmentId: { type: Schema.Types.ObjectId, required: true, ref: 'department' },
     departmentalFeeId: { type: Schema.Types.ObjectId, required: true, ref: DepartmentalFeeForm },
     semesterFeeId: { type: Schema.Types.ObjectId, required: true, ref: SemesterFee },
     residentialFeeId: { type: Schema.Types.ObjectId, ref: ResidentialFeeForm },

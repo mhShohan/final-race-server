@@ -21,10 +21,22 @@ feeFromRoutes.get(
   verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
   feeFormControllers.getAll,
 );
+
+feeFromRoutes.get(
+  '/by-chairman',
+  verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  feeFormControllers.getAllByChairman,
+);
+
+feeFromRoutes.patch(
+  '/status-update/:id',
+  feeFormControllers.updateAndAccept,
+);
+
 feeFromRoutes.get(
   '/:id',
   verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
-  feeFormControllers.getAll,
+  feeFormControllers.getSingle,
 );
 
 export default feeFromRoutes;

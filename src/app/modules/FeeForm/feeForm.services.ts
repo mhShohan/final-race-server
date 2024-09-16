@@ -57,6 +57,7 @@ class FeeFormServices {
       result.residentialFeeForm = await ResidentialFeeForm.create([residentialFee], { session });
 
       const feeFromPayload: IFeeFormRelation = {
+        departmentId: student.departmentId!,
         departmentalFeeId: result.departmentalFeeFrom[0]._id,
         semesterFeeId: result.semesterFeeForm[0]._id,
         residentialFeeId: result.residentialFeeForm[0]._id,
@@ -93,14 +94,17 @@ class FeeFormServices {
       query.studentId = user._id;
     }
 
-    /// if CHAIRMAN then show only submitted forms and only for his department
+    /* if CHAIRMAN then show only submitted forms and only for his department
     if (user.role === 'CHAIRMAN') {
       const admin = await Admin.findById(user._id);
       if (!admin) throw new CustomError(STATUS.NOT_FOUND, 'Admin is not found!', 'NOT_FOUND');
 
+      query.departmentalFeeId = {}
+
       query.departmentalFeeId.departmentId = admin.departmentId;
       query.status = 'submitted';
     }
+      */
 
     return await FeeForm.find(query)
       .populate('departmentalFeeId')
@@ -108,8 +112,24 @@ class FeeFormServices {
       .populate('semesterFeeId');
   }
 
+  async getAllByChairman(userId: string) {
+    const chairman = await Admin.findById(userId)
+    if (!chairman) throw new CustomError(STATUS.NOT_FOUND, 'Chairman is not found!', 'NOT_FOUND');
+
+    const forms = await FeeForm.find({ departmentId: chairman?.departmentId, status: 'submitted' }).populate('studentId').populate('departmentalFeeId')
+      .populate('residentialFeeId')
+      .populate('semesterFeeId');
+
+    return forms
+  }
+
+  async updateAndAccept(id: string, payload: Record<string, unknown>) {
+    const forms = await FeeForm.findByIdAndUpdate(id, payload)
+    return forms
+  }
+
   async readOne(id: string) {
-    return await FeeForm.findById(id)
+    return await FeeForm.findById(id).populate('studentId')
       .populate('departmentalFeeId')
       .populate('residentialFeeId')
       .populate('semesterFeeId');
