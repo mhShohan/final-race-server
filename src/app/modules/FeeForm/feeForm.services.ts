@@ -123,6 +123,25 @@ class FeeFormServices {
     return forms
   }
 
+
+  async getAllByHall(userId: string) {
+    const hallOperator = await Admin.findById(userId)
+    if (!hallOperator) throw new CustomError(STATUS.NOT_FOUND, 'hallOperator is not found!', 'NOT_FOUND');
+
+
+    const forms = await FeeForm.find({ status: 'approved_by_chairman' }).populate('studentId').populate('departmentalFeeId')
+      .populate('residentialFeeId')
+      .populate('semesterFeeId');
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = forms.filter((form: any) => {
+      return String(form.studentId.hallId) === String(hallOperator.hallId)
+    })
+
+
+    return result
+  }
+
   async updateAndAccept(id: string, payload: Record<string, unknown>) {
     const forms = await FeeForm.findByIdAndUpdate(id, payload)
     return forms

@@ -4,7 +4,7 @@ import CustomError from '../../../errorHandler/customError';
 import STATUS from '../../../lib/httpStatus';
 import ResidentialFeeForm from './residentialFeeForm.model';
 import { IResidentialFeeForm } from './residentialFeeForm.interface';
-import monthDifference from '../../../utils/monthDifference';
+// import monthDifference from '../../../utils/monthDifference';
 
 class ResidentialFeeFormServices {
   private model = ResidentialFeeForm;
@@ -15,7 +15,7 @@ class ResidentialFeeFormServices {
 
     payload.hallId = student?.hallId as Types.ObjectId;
     payload.studentId = student._id as Types.ObjectId;
-    payload.totalFee = payload.fee * monthDifference(payload.from, payload.to);
+    // payload.totalFee = payload.fee * monthDifference(payload.from, payload.to);
 
     return this.model.create(payload);
   }
@@ -30,13 +30,7 @@ class ResidentialFeeFormServices {
   }
 
   async update(id: string, payload: Partial<IResidentialFeeForm>) {
-    const existedData = await this._isExists(id);
 
-    if (payload.fee || payload.from || payload.to) {
-      payload.totalFee =
-        (payload.fee || existedData.fee) *
-        monthDifference(payload.from || existedData.from, payload.to || existedData.to);
-    }
 
     return this.model.findByIdAndUpdate(id, payload, { new: true, runValidators: true });
   }

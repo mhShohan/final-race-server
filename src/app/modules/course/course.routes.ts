@@ -17,6 +17,7 @@ courseRoutes.get(
     adminRoleConstant.ADMIN,
     adminRoleConstant.DEPARTMENT_OPERATOR,
     adminRoleConstant.STUDENT,
+    adminRoleConstant.CHAIRMAN,
   ]),
   courseControllers.getAll,
 );

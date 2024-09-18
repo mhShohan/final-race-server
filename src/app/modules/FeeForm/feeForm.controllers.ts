@@ -45,6 +45,18 @@ class FeeFormControllers {
     });
   });
 
+  // get All By hall
+  getAllByHall = asyncHandler(async (req, res) => {
+    const result = await this.services.getAllByHall(req.user._id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} fetched Successfully`,
+      data: result,
+    });
+  });
+
   // getAllByChairman
   updateAndAccept = asyncHandler(async (req, res) => {
     const payload = { status: req.body.status, declineMessage: req.body.declineMessage }

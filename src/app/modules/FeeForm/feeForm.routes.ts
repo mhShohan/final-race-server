@@ -28,6 +28,12 @@ feeFromRoutes.get(
   feeFormControllers.getAllByChairman,
 );
 
+feeFromRoutes.get(
+  '/by-hall',
+  verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  feeFormControllers.getAllByHall,
+);
+
 feeFromRoutes.patch(
   '/status-update/:id',
   feeFormControllers.updateAndAccept,

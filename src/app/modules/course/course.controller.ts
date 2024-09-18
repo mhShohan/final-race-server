@@ -52,6 +52,7 @@ const getAll = asyncHandler(async (req, res) => {
       query.departmentId = student?.departmentId as Types.ObjectId;
     } else {
       const admin = await Admin.findById(req.user._id);
+      console.log(admin)
       if (admin?.departmentId) {
         query.departmentId = admin?.departmentId as Types.ObjectId;
       }
