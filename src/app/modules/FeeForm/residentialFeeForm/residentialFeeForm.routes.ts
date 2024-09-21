@@ -30,8 +30,8 @@ residentialFeeFormRoutes.get(
 
 residentialFeeFormRoutes.patch(
   '/:id',
-  verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
-  validateRequest(residentialFeeFormValidator.updateSchema),
+  // verifyRole(['STUDENT', 'SUPER_ADMIN', 'ADMIN']),
+  // validateRequest(residentialFeeFormValidator.updateSchema),
   residentialFeeFormControllers.update,
 );
 

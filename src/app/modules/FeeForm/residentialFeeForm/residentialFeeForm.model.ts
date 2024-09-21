@@ -7,8 +7,8 @@ const residentialFeeFormSchema = new Schema<IResidentialFeeForm>(
     studentId: { type: Schema.Types.ObjectId, required: true },
     session: { type: String, required: true },
     fee: { type: Number, default: 0 },
-    from: { type: String },
-    to: { type: String },
+    from: { type: Date },
+    to: { type: Date },
     totalResidentFee: { type: Number, default: 0 },
     othersFee: { type: Number, default: 0 },
   },
@@ -20,3 +20,5 @@ const ResidentialFeeForm = model<IResidentialFeeForm>(
   residentialFeeFormSchema,
 );
 export default ResidentialFeeForm;
+
+

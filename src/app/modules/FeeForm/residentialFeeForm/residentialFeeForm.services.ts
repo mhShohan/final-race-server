@@ -30,8 +30,6 @@ class ResidentialFeeFormServices {
   }
 
   async update(id: string, payload: Partial<IResidentialFeeForm>) {
-
-
     return this.model.findByIdAndUpdate(id, payload, { new: true, runValidators: true });
   }
 
