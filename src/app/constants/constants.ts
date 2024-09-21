@@ -27,6 +27,7 @@ export const semesterFeeFormStatus = [
   'rejected_by_hall_authority',
   'approved_by_bank_accountant',
   'rejected_by_bank_accountant',
+  'payment_completed',
   'approved_by_exam_controller',
   'rejected_by_exam_controller',
 ];
