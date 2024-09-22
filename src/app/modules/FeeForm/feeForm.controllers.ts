@@ -35,7 +35,7 @@ class FeeFormControllers {
 
   // getAllByChairman
   getAllByChairman = asyncHandler(async (req, res) => {
-    const result = await this.services.getAllByChairman(req.user._id);
+    const result = await this.services.getAllByChairman(req.user._id, req.query);
 
     sendResponse(res, {
       success: true,
@@ -47,7 +47,7 @@ class FeeFormControllers {
 
   // get All By hall
   getAllByHall = asyncHandler(async (req, res) => {
-    const result = await this.services.getAllByHall(req.user._id);
+    const result = await this.services.getAllByHall(req.user._id, req.query);
 
     sendResponse(res, {
       success: true,

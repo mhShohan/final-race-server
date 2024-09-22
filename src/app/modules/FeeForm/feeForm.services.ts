@@ -93,12 +93,15 @@ class FeeFormServices {
     const query: Record<string, any> = {};
     if (user.role === 'STUDENT') {
       query.studentId = user._id;
-      query.status = { $ne: "approved_by_exam_controller" }
+      if (!queryParams.status) {
+        query.status = { $ne: "approved_by_exam_controller" }
+      }
     }
 
     if (queryParams.status && semesterFeeFormStatus.includes(queryParams.status as string)) {
       query.status = queryParams.status
     }
+
 
     return await FeeForm.find(query)
       .populate('departmentalFeeId')
@@ -106,11 +109,38 @@ class FeeFormServices {
       .populate('semesterFeeId');
   }
 
-  async getAllByChairman(userId: string) {
+  async getAllByChairman(userId: string, queryParams: Record<string, unknown>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let status: any = 'submitted';
     const chairman = await Admin.findById(userId)
     if (!chairman) throw new CustomError(STATUS.NOT_FOUND, 'Chairman is not found!', 'NOT_FOUND');
 
-    const forms = await FeeForm.find({ departmentId: chairman?.departmentId, status: 'submitted' }).populate('studentId').populate('departmentalFeeId')
+    if (queryParams.status === 'true') {
+      status = {
+        $in: ['approved_by_chairman',
+          'rejected_by_chairman',
+          'approved_by_hall_authority',
+          'rejected_by_hall_authority',
+          'approved_by_bank_accountant',
+          'rejected_by_bank_accountant',
+          'payment_completed',
+          'approved_by_exam_controller',
+          'rejected_by_exam_controller',]
+      }
+    }
+
+    const query: Record<string, unknown> = {
+      departmentId: chairman?.departmentId, status
+    }
+
+    if (queryParams.search) {
+      const student = await Student.findOne({ studentId: queryParams.search })
+      if (student) {
+        query.studentId = student._id
+      }
+    }
+
+    const forms = await FeeForm.find(query).populate('studentId').populate('departmentalFeeId')
       .populate('residentialFeeId')
       .populate('semesterFeeId');
 
@@ -118,12 +148,40 @@ class FeeFormServices {
   }
 
 
-  async getAllByHall(userId: string) {
+  async getAllByHall(userId: string, queryParams: Record<string, unknown>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let status: any = 'approved_by_chairman';
     const hallOperator = await Admin.findById(userId)
     if (!hallOperator) throw new CustomError(STATUS.NOT_FOUND, 'hallOperator is not found!', 'NOT_FOUND');
 
+    if (queryParams.status === 'true') {
+      status = {
+        $in: [
+          'approved_by_chairman',
+          'rejected_by_chairman',
+          'approved_by_hall_authority',
+          'rejected_by_hall_authority',
+          'approved_by_bank_accountant',
+          'rejected_by_bank_accountant',
+          'payment_completed',
+          'approved_by_exam_controller',
+          'rejected_by_exam_controller'
+        ]
+      }
+    }
 
-    const forms = await FeeForm.find({ status: 'approved_by_chairman' }).populate('studentId').populate('departmentalFeeId')
+    const query: Record<string, unknown> = {
+      status
+    }
+
+    if (queryParams.search) {
+      const student = await Student.findOne(query)
+      if (student) {
+        query.studentId = student._id
+      }
+    }
+
+    const forms = await FeeForm.find(query).populate('studentId').populate('departmentalFeeId')
       .populate('residentialFeeId')
       .populate('semesterFeeId');
 
@@ -131,7 +189,6 @@ class FeeFormServices {
     const result = forms.filter((form: any) => {
       return String(form.studentId.hallId) === String(hallOperator.hallId)
     })
-
 
     return result
   }
