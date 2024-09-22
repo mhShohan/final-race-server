@@ -8,6 +8,7 @@ import FeeForm, { IFeeFormRelation } from './feeFrom.model';
 import ResidentialFeeForm from './residentialFeeForm/residentialFeeForm.model';
 import SemesterFee from './semesterFeeForm/semesterFeeForm.model';
 import Admin from '../admin/admin.model';
+import { semesterFeeFormStatus } from '../../constants/constants';
 
 class FeeFormServices {
   async create(payload: IFeeForm, userId: string) {
@@ -86,25 +87,18 @@ class FeeFormServices {
     }
   }
 
-  async readAll(user: { role: string; _id: string }) {
+  async readAll(user: { role: string; _id: string }, queryParams: Record<string, unknown>) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: Record<string, any> = {};
     if (user.role === 'STUDENT') {
       query.studentId = user._id;
+      query.status = { $ne: "approved_by_exam_controller" }
     }
 
-    /* if CHAIRMAN then show only submitted forms and only for his department
-    if (user.role === 'CHAIRMAN') {
-      const admin = await Admin.findById(user._id);
-      if (!admin) throw new CustomError(STATUS.NOT_FOUND, 'Admin is not found!', 'NOT_FOUND');
-
-      query.departmentalFeeId = {}
-
-      query.departmentalFeeId.departmentId = admin.departmentId;
-      query.status = 'submitted';
+    if (queryParams.status && semesterFeeFormStatus.includes(queryParams.status as string)) {
+      query.status = queryParams.status
     }
-      */
 
     return await FeeForm.find(query)
       .populate('departmentalFeeId')
