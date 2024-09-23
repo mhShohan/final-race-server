@@ -137,6 +137,8 @@ class FeeFormServices {
       const student = await Student.findOne({ studentId: queryParams.search })
       if (student) {
         query.studentId = student._id
+      } else {
+        query.studentId = null
       }
     }
 
@@ -175,9 +177,12 @@ class FeeFormServices {
     }
 
     if (queryParams.search) {
-      const student = await Student.findOne(query)
+      console.log(queryParams.search)
+      const student = await Student.findOne({ studentId: queryParams.search })
       if (student) {
         query.studentId = student._id
+      } else {
+        query.studentId = null
       }
     }
 
