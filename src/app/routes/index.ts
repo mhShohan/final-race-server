@@ -10,6 +10,7 @@ import facultyRoutes from '../modules/faculty/faculty.routes';
 import hallRoutes from '../modules/hall/hall.routes';
 import registrationInfoRoutes from '../modules/registrationInfo/registrationInfo.routes';
 import studentRoutes from '../modules/student/student.routes';
+import paymentRoutes from '../modules/payment/payment.routes';
 
 const rootRoutes = Router();
 
@@ -24,5 +25,6 @@ rootRoutes.use('/semester-fee-form', semesterFeeRoutes);
 rootRoutes.use('/departmental-fee-form', departmentalFeeFormRoutes);
 rootRoutes.use('/residential-fee-form', residentialFeeFormRoutes);
 rootRoutes.use('/fee-form', feeFromRoutes);
+rootRoutes.use('/payments', paymentRoutes);
 
 export default rootRoutes;
