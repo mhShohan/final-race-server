@@ -57,6 +57,18 @@ class FeeFormControllers {
     });
   });
 
+  // get All By Exam Controller
+  getAllByExamController = asyncHandler(async (req, res) => {
+    const result = await this.services.getAllByExamController(req.query);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} fetched Successfully`,
+      data: result,
+    });
+  });
+
   // getAllByChairman
   updateAndAccept = asyncHandler(async (req, res) => {
     const payload = { status: req.body.status, declineMessage: req.body.declineMessage }

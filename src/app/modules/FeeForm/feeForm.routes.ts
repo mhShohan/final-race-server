@@ -18,20 +18,26 @@ feeFromRoutes.post(
 
 feeFromRoutes.get(
   '/',
-  verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  verifyRole(['STUDENT', 'CHAIRMAN', 'ADMIN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
   feeFormControllers.getAll,
 );
 
 feeFromRoutes.get(
   '/by-chairman',
-  verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  verifyRole(['CHAIRMAN']),
   feeFormControllers.getAllByChairman,
 );
 
 feeFromRoutes.get(
   '/by-hall',
-  verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  verifyRole(['HALL_OPERATOR']),
   feeFormControllers.getAllByHall,
+);
+
+feeFromRoutes.get(
+  '/exam-controller',
+  verifyRole(['ADMIN',]),
+  feeFormControllers.getAllByExamController,
 );
 
 feeFromRoutes.patch(
@@ -41,7 +47,7 @@ feeFromRoutes.patch(
 
 feeFromRoutes.get(
   '/:id',
-  verifyRole(['STUDENT', 'CHAIRMAN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  verifyRole(['STUDENT', 'CHAIRMAN', 'ADMIN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
   feeFormControllers.getSingle,
 );
 

@@ -149,6 +149,40 @@ class FeeFormServices {
     return forms
   }
 
+  async getAllByExamController(queryParams: Record<string, unknown>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let status: any = 'payment_completed';
+
+    if (queryParams.status === 'true') {
+      status = {
+        $in: [
+          'payment_completed',
+          'approved_by_exam_controller',
+          'rejected_by_exam_controller',]
+      }
+    }
+
+    const query: Record<string, unknown> = {
+      status
+    }
+
+
+    if (queryParams.search) {
+      const student = await Student.findOne({ studentId: queryParams.search })
+      if (student) {
+        query.studentId = student._id
+      } else {
+        query.studentId = null
+      }
+    }
+
+    const forms = await FeeForm.find(query).populate('studentId').populate('departmentalFeeId')
+      .populate('residentialFeeId')
+      .populate('semesterFeeId');
+
+    return forms
+  }
+
 
   async getAllByHall(userId: string, queryParams: Record<string, unknown>) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -177,7 +211,6 @@ class FeeFormServices {
     }
 
     if (queryParams.search) {
-      console.log(queryParams.search)
       const student = await Student.findOne({ studentId: queryParams.search })
       if (student) {
         query.studentId = student._id
