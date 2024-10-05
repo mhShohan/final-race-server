@@ -15,8 +15,11 @@ class PaymentServices {
 
     const payload = {
       formId: body.formId,
-      amount: body.totalFee,
-      backAccountId: body.bankAccountId,
+      amount: body.amount,
+      bankAccountId: body.backAccountId,
+      studentId: student._id,
+      departmentId: student.departmentId,
+      hallId: student.hallId,
     }
 
     const payment = await this.model.create(payload);
