@@ -9,34 +9,40 @@ const feeFromRoutes = Router();
 
 feeFromRoutes.use(verifyAuth);
 
+feeFromRoutes.get(
+  '/check',
+  verifyRole([ 'STUDENT' ]),
+  feeFormControllers.checkExistence,
+);
+
 feeFromRoutes.post(
   '/',
-  verifyRole(['STUDENT']),
+  verifyRole([ 'STUDENT' ]),
   validateRequest(feeFormValidator.createSchema),
   feeFormControllers.create,
 );
 
 feeFromRoutes.get(
   '/',
-  verifyRole(['STUDENT', 'CHAIRMAN', 'ADMIN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  verifyRole([ 'STUDENT', 'CHAIRMAN', 'ADMIN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR' ]),
   feeFormControllers.getAll,
 );
 
 feeFromRoutes.get(
   '/by-chairman',
-  verifyRole(['CHAIRMAN']),
+  verifyRole([ 'CHAIRMAN' ]),
   feeFormControllers.getAllByChairman,
 );
 
 feeFromRoutes.get(
   '/by-hall',
-  verifyRole(['HALL_OPERATOR']),
+  verifyRole([ 'HALL_OPERATOR' ]),
   feeFormControllers.getAllByHall,
 );
 
 feeFromRoutes.get(
   '/exam-controller',
-  verifyRole(['ADMIN',]),
+  verifyRole([ 'ADMIN', ]),
   feeFormControllers.getAllByExamController,
 );
 
@@ -47,7 +53,7 @@ feeFromRoutes.patch(
 
 feeFromRoutes.get(
   '/:id',
-  verifyRole(['STUDENT', 'CHAIRMAN', 'ADMIN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR']),
+  verifyRole([ 'STUDENT', 'CHAIRMAN', 'ADMIN', 'HALL_OPERATOR', 'DEPARTMENT_OPERATOR' ]),
   feeFormControllers.getSingle,
 );
 
