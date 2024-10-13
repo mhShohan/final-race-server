@@ -9,6 +9,18 @@ class FeeFormControllers {
   private services = feeFormServices;
   private messageTitle = 'Fee From';
 
+  // check application existence
+  checkExistence = asyncHandler(async (req, res) => {
+    const result = await this.services.checkExistence(req.user._id, req.query);
+
+    this.sendResponse(res, {
+      success: true,
+      statusCode: this.STATUS.OK,
+      message: `Your are going to apply for registration`,
+      data: result,
+    });
+  });
+
   // Create
   create = asyncHandler(async (req, res) => {
     const result = await this.services.create(req.body, req.user._id);
@@ -53,6 +65,18 @@ class FeeFormControllers {
       success: true,
       statusCode: STATUS.OK,
       message: `${this.messageTitle} fetched Successfully`,
+      data: result,
+    });
+  });
+
+  // get All  hall payments
+  getAllHallPayments = asyncHandler(async (req, res) => {
+    const result = await this.services.getAllHallPayments(req.user._id, req.query);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} payment fetched Successfully`,
       data: result,
     });
   });

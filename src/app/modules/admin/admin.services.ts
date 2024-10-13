@@ -161,7 +161,15 @@ class AdminService extends BaseServices<any> {
     const admin = await this.model.findById(id);
     if (!admin) throw new CustomError(404, 'Admin not found!');
 
-    return await Student.find({ departmentId: admin.departmentId });
+    const query: any = {}
+
+    if (admin.role === 'CHAIRMAN' || admin.role === 'DEPARTMENT_OPERATOR') {
+      query.departmentId = admin.departmentId
+    } else if (admin.role === 'HALL_OPERATOR') {
+      query.hallId = admin.hallId
+    }
+
+    return await Student.find(query);
   }
 
   async reviewRequest(id: string) {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose, { Types } from 'mongoose';
 import CustomError from '../../errorHandler/customError';
 import STATUS from '../../lib/httpStatus';
@@ -11,6 +12,21 @@ import Admin from '../admin/admin.model';
 import { semesterFeeFormStatus } from '../../constants/constants';
 
 class FeeFormServices {
+
+  async checkExistence(userId: string, queryParams: Record<string, unknown>) {
+
+    const query: Record<string, unknown> = {
+      studentId: userId, ...queryParams
+    }
+
+    if (query.examType !== 'Regular') return
+
+    const form = await FeeForm.findOne(query);
+    if (form) throw new CustomError(STATUS.CONFLICT, 'Form already exists!', 'CONFLICT');
+
+    return
+  }
+
   async create(payload: IFeeForm, userId: string) {
     const { year, semester, semesterFee, departmentalFee, examType, courses } = payload;
 
@@ -53,15 +69,15 @@ class FeeFormServices {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: Record<string, any> = {};
 
-      result.departmentalFeeFrom = await DepartmentalFeeForm.create([departmentalFee], { session });
-      result.semesterFeeForm = await SemesterFee.create([semesterFee], { session });
-      result.residentialFeeForm = await ResidentialFeeForm.create([residentialFee], { session });
+      result.departmentalFeeFrom = await DepartmentalFeeForm.create([ departmentalFee ], { session });
+      result.semesterFeeForm = await SemesterFee.create([ semesterFee ], { session });
+      result.residentialFeeForm = await ResidentialFeeForm.create([ residentialFee ], { session });
 
       const feeFromPayload: IFeeFormRelation = {
         departmentId: student.departmentId!,
-        departmentalFeeId: result.departmentalFeeFrom[0]._id,
-        semesterFeeId: result.semesterFeeForm[0]._id,
-        residentialFeeId: result.residentialFeeForm[0]._id,
+        departmentalFeeId: result.departmentalFeeFrom[ 0 ]._id,
+        semesterFeeId: result.semesterFeeForm[ 0 ]._id,
+        residentialFeeId: result.residentialFeeForm[ 0 ]._id,
         courses,
         year,
         examType,
@@ -71,14 +87,14 @@ class FeeFormServices {
       };
 
 
-      await FeeForm.create([feeFromPayload], { session });
+      await FeeForm.create([ feeFromPayload ], { session });
 
       await session.commitTransaction();
 
       return {
-        departmentalFeeFrom: result.departmentalFeeFrom[0],
-        semesterFeeForm: result.semesterFeeForm[0],
-        residentialFeeForm: result.residentialFeeForm[0],
+        departmentalFeeFrom: result.departmentalFeeFrom[ 0 ],
+        semesterFeeForm: result.semesterFeeForm[ 0 ],
+        residentialFeeForm: result.residentialFeeForm[ 0 ],
       };
     } catch (error) {
       await session.abortTransaction();
@@ -117,7 +133,7 @@ class FeeFormServices {
 
     if (queryParams.status === 'true') {
       status = {
-        $in: ['approved_by_chairman',
+        $in: [ 'approved_by_chairman',
           'rejected_by_chairman',
           'approved_by_hall_authority',
           'rejected_by_hall_authority',
@@ -125,7 +141,7 @@ class FeeFormServices {
           'rejected_by_bank_accountant',
           'payment_completed',
           'approved_by_exam_controller',
-          'rejected_by_exam_controller',]
+          'rejected_by_exam_controller', ]
       }
     }
 
@@ -158,7 +174,7 @@ class FeeFormServices {
         $in: [
           'payment_completed',
           'approved_by_exam_controller',
-          'rejected_by_exam_controller',]
+          'rejected_by_exam_controller', ]
       }
     }
 
@@ -227,6 +243,48 @@ class FeeFormServices {
     const result = forms.filter((form: any) => {
       return String(form.studentId.hallId) === String(hallOperator.hallId)
     })
+
+    return result
+  }
+
+  async getAllHallPayments(userId: string, queryParams: Record<string, unknown>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const hallOperator = await Admin.findById(userId)
+    if (!hallOperator) throw new CustomError(STATUS.NOT_FOUND, 'hallOperator is not found!', 'NOT_FOUND');
+
+    const query: Record<string, unknown> = {
+      status: {
+        $in: [
+          'approved_by_chairman',
+          'rejected_by_chairman',
+          'approved_by_hall_authority',
+          'rejected_by_hall_authority',
+          'approved_by_bank_accountant',
+          'rejected_by_bank_accountant',
+          'payment_completed',
+          'approved_by_exam_controller',
+          'rejected_by_exam_controller'
+        ]
+      }
+    }
+
+    if (queryParams.search) {
+      const student = await Student.findOne({ studentId: queryParams.search })
+      if (student) {
+        query.studentId = student._id
+      } else {
+        query.studentId = null
+      }
+    }
+
+    const forms = await FeeForm.find(query).populate('studentId').populate('departmentalFeeId')
+      .populate('residentialFeeId')
+      .populate('semesterFeeId');
+
+    const result = forms.filter((form: any) => {
+
+      return String(form.studentId.hallId) === String(hallOperator.hallId)
+    }).filter((form: any) => form.residentialFeeId.totalResidentFee > 0)
 
     return result
   }
