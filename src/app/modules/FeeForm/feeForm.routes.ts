@@ -41,6 +41,12 @@ feeFromRoutes.get(
 );
 
 feeFromRoutes.get(
+  '/by-hall/payment',
+  verifyRole([ 'HALL_OPERATOR' ]),
+  feeFormControllers.getAllHallPayments,
+);
+
+feeFromRoutes.get(
   '/exam-controller',
   verifyRole([ 'ADMIN', ]),
   feeFormControllers.getAllByExamController,

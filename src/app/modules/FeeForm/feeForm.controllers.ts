@@ -69,6 +69,18 @@ class FeeFormControllers {
     });
   });
 
+  // get All  hall payments
+  getAllHallPayments = asyncHandler(async (req, res) => {
+    const result = await this.services.getAllHallPayments(req.user._id, req.query);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} payment fetched Successfully`,
+      data: result,
+    });
+  });
+
   // get All By Exam Controller
   getAllByExamController = asyncHandler(async (req, res) => {
     const result = await this.services.getAllByExamController(req.query);

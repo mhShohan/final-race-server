@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose, { Types } from 'mongoose';
 import CustomError from '../../errorHandler/customError';
 import STATUS from '../../lib/httpStatus';
@@ -242,6 +243,48 @@ class FeeFormServices {
     const result = forms.filter((form: any) => {
       return String(form.studentId.hallId) === String(hallOperator.hallId)
     })
+
+    return result
+  }
+
+  async getAllHallPayments(userId: string, queryParams: Record<string, unknown>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const hallOperator = await Admin.findById(userId)
+    if (!hallOperator) throw new CustomError(STATUS.NOT_FOUND, 'hallOperator is not found!', 'NOT_FOUND');
+
+    const query: Record<string, unknown> = {
+      status: {
+        $in: [
+          'approved_by_chairman',
+          'rejected_by_chairman',
+          'approved_by_hall_authority',
+          'rejected_by_hall_authority',
+          'approved_by_bank_accountant',
+          'rejected_by_bank_accountant',
+          'payment_completed',
+          'approved_by_exam_controller',
+          'rejected_by_exam_controller'
+        ]
+      }
+    }
+
+    if (queryParams.search) {
+      const student = await Student.findOne({ studentId: queryParams.search })
+      if (student) {
+        query.studentId = student._id
+      } else {
+        query.studentId = null
+      }
+    }
+
+    const forms = await FeeForm.find(query).populate('studentId').populate('departmentalFeeId')
+      .populate('residentialFeeId')
+      .populate('semesterFeeId');
+
+    const result = forms.filter((form: any) => {
+
+      return String(form.studentId.hallId) === String(hallOperator.hallId)
+    }).filter((form: any) => form.residentialFeeId.totalResidentFee > 0)
 
     return result
   }
