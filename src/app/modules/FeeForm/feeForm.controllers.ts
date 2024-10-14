@@ -118,6 +118,18 @@ class FeeFormControllers {
       data: result,
     });
   });
+
+  // acceptAll
+  acceptAll = asyncHandler(async (req, res) => {
+    const result = await this.services.acceptAll(req.body);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} accept all Successfully`,
+      data: result,
+    });
+  });
 }
 
 const feeFormControllers = new FeeFormControllers();
