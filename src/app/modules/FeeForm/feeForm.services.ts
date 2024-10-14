@@ -279,7 +279,7 @@ class FeeFormServices {
 
     const forms = await FeeForm.find(query).populate('studentId').populate('departmentalFeeId')
       .populate('residentialFeeId')
-      .populate('semesterFeeId');
+      .populate('semesterFeeId')
 
     const result = forms.filter((form: any) => {
 
@@ -296,6 +296,17 @@ class FeeFormServices {
 
   async readOne(id: string) {
     return await FeeForm.findById(id).populate('studentId')
+      .populate('departmentalFeeId')
+      .populate('residentialFeeId')
+      .populate('semesterFeeId')
+      .populate('departmentId')
+  }
+
+  async acceptAll(payload: Record<string, unknown>) {
+    const filter = { status: payload.oldStatus }
+    const update = { status: payload.newStatus }
+
+    return await FeeForm.updateMany(filter, update).populate('studentId')
       .populate('departmentalFeeId')
       .populate('residentialFeeId')
       .populate('semesterFeeId');

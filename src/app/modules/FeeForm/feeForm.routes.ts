@@ -63,4 +63,9 @@ feeFromRoutes.get(
   feeFormControllers.getSingle,
 );
 
+feeFromRoutes.patch(
+  '/accept-all',
+  feeFormControllers.acceptAll,
+);
+
 export default feeFromRoutes;
