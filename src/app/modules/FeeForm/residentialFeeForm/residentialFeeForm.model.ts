@@ -3,8 +3,8 @@ import { IResidentialFeeForm } from './residentialFeeForm.interface';
 
 const residentialFeeFormSchema = new Schema<IResidentialFeeForm>(
   {
-    hallId: { type: Schema.Types.ObjectId, required: true },
-    studentId: { type: Schema.Types.ObjectId, required: true },
+    hallId: { type: Schema.Types.ObjectId, required: true, ref: 'hall' },
+    studentId: { type: Schema.Types.ObjectId, required: true, ref: 'student' },
     session: { type: String, required: true },
     fee: { type: Number, default: 0 },
     from: { type: Date },

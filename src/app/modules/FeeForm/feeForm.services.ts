@@ -21,8 +21,11 @@ class FeeFormServices {
 
     if (query.examType !== 'Regular') return
 
+    const student = await Student.findOne({ _id: userId, status: 'ACTIVE' });
+    if (!student) throw new CustomError(STATUS.BAD_REQUEST, 'You are not verified...!!!',);
+
     const form = await FeeForm.findOne(query);
-    if (form) throw new CustomError(STATUS.CONFLICT, 'Form already exists!', 'CONFLICT');
+    if (form) throw new CustomError(STATUS.CONFLICT, 'You already registered this semester!', 'CONFLICT');
 
     return
   }
@@ -35,7 +38,7 @@ class FeeFormServices {
 
     /**
      * Semester Fee Form
-     */
+    */
     semesterFee.studentId = student._id as Types.ObjectId;
     semesterFee.departmentId = student.departmentId as Types.ObjectId;
     semesterFee.session = student.session as string;
@@ -44,7 +47,7 @@ class FeeFormServices {
 
     /**
      * Departmental Fee Form
-     */
+    */
     departmentalFee.studentId = student._id as Types.ObjectId;
     departmentalFee.departmentId = student.departmentId as Types.ObjectId;
     departmentalFee.session = student.session as string;
@@ -53,7 +56,7 @@ class FeeFormServices {
 
     /**
      * Residential Fee Form
-     */
+    */
     const residentialFee: Record<string, unknown> = {}
 
     residentialFee.studentId = student._id as Types.ObjectId;
@@ -86,7 +89,6 @@ class FeeFormServices {
         status: 'submitted'
       };
 
-
       await FeeForm.create([ feeFromPayload ], { session });
 
       await session.commitTransaction();
@@ -97,6 +99,7 @@ class FeeFormServices {
         residentialFeeForm: result.residentialFeeForm[ 0 ],
       };
     } catch (error) {
+      console.log(error)
       await session.abortTransaction();
     } finally {
       await session.endSession();
