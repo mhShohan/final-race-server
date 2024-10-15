@@ -1,15 +1,12 @@
-import { Types, model, Schema } from 'mongoose';
-import DepartmentalFeeForm from './departmentalFeeForm/departmentalFeeForm.model';
-import SemesterFee from './semesterFeeForm/semesterFeeForm.model';
-import ResidentialFeeForm from './residentialFeeForm/residentialFeeForm.model';
+import { model, Schema, Types } from 'mongoose';
 import {
   academicSemester,
   academicType,
   academicYear,
   semesterFeeFormStatus,
 } from '../../constants/constants';
-import { ICourse } from '../course/course.interface';
 import { ISemesterFeeFormStatus, TSemesters, TYears } from '../../interfaces/interface';
+import { ICourse } from '../course/course.interface';
 
 export interface IFeeFormRelation {
   year: TYears;
@@ -27,25 +24,25 @@ export interface IFeeFormRelation {
 
 const courseSchema = new Schema(
   {
-    _id: { type: Schema.Types.ObjectId, required: true },
-    title: { type: String, required: [true, 'Course title is required!'], unique: true },
-    code: { type: String, required: [true, 'Course code is required!'], unique: true },
-    credit: { type: Number, required: [true, 'Credit is required!'] },
+    // _id: { type: Schema.Types.ObjectId, required: true },
+    title: { type: String, required: [ true, 'Course title is required!' ] },
+    code: { type: String, required: [ true, 'Course code is required!' ], },
+    credit: { type: Number, required: [ true, 'Credit is required!' ] },
     facultyId: {
       type: Schema.Types.ObjectId,
-      required: [true, 'facultyId is required!'],
+      required: [ true, 'facultyId is required!' ],
       ref: 'faculty',
     },
     departmentId: {
       type: Schema.Types.ObjectId,
-      required: [true, 'departmentId is required!'],
+      required: [ true, 'departmentId is required!' ],
       ref: 'department',
     },
     year: { type: String, enum: academicYear, required: true },
     semester: { type: String, enum: academicSemester, required: true },
     type: { type: String, enum: academicType, required: true },
   },
-  { _id: false },
+  // { _id: false },
 );
 
 const FeeFormSchema = new Schema<IFeeFormRelation>(
@@ -54,11 +51,11 @@ const FeeFormSchema = new Schema<IFeeFormRelation>(
     year: { type: String, enum: academicYear, required: true },
     studentId: { type: Schema.Types.ObjectId, required: true, ref: 'student' },
     departmentId: { type: Schema.Types.ObjectId, required: true, ref: 'department' },
-    departmentalFeeId: { type: Schema.Types.ObjectId, required: true, ref: DepartmentalFeeForm },
-    semesterFeeId: { type: Schema.Types.ObjectId, required: true, ref: SemesterFee },
-    residentialFeeId: { type: Schema.Types.ObjectId, ref: ResidentialFeeForm },
-    courses: [courseSchema],
-    examType: { type: String, enum: ['Regular', 'Retake', 'Improvement'], required: true },
+    departmentalFeeId: { type: Schema.Types.ObjectId, required: true, ref: 'departmental_fee_form' },
+    semesterFeeId: { type: Schema.Types.ObjectId, required: true, ref: 'semester_fee_form' },
+    residentialFeeId: { type: Schema.Types.ObjectId, ref: 'residential_fee_form' },
+    courses: [ courseSchema ],
+    examType: { type: String, enum: [ 'Regular', 'Retake', 'Improvement' ], required: true },
     status: { type: String, enum: semesterFeeFormStatus, required: true },
     declineMessage: { type: String },
   },

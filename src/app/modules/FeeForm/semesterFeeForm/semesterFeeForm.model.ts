@@ -4,8 +4,8 @@ import { academicSemester, academicYear } from '../../../constants/constants';
 
 const SemesterFeeSchema = new Schema<ISemesterFeeForm>(
   {
-    departmentId: { type: Schema.Types.ObjectId, required: true },
-    studentId: { type: Schema.Types.ObjectId, required: true },
+    departmentId: { type: Schema.Types.ObjectId, required: true, ref: 'department' },
+    studentId: { type: Schema.Types.ObjectId, required: true, ref: 'student' },
     year: { type: String, required: true, enum: academicYear },
     semester: { type: String, required: true, enum: academicSemester },
     session: { type: String, required: true },
@@ -26,5 +26,5 @@ const SemesterFeeSchema = new Schema<ISemesterFeeForm>(
   { timestamps: true },
 );
 
-const SemesterFee = model<ISemesterFeeForm>('Semester_Fee_form', SemesterFeeSchema);
+const SemesterFee = model<ISemesterFeeForm>('semester_fee_form', SemesterFeeSchema);
 export default SemesterFee;
