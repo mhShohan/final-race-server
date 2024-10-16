@@ -123,6 +123,7 @@ class FeeFormServices {
 
 
     return await FeeForm.find(query)
+      .populate('studentId')
       .populate('departmentalFeeId')
       .populate('residentialFeeId')
       .populate('semesterFeeId');
