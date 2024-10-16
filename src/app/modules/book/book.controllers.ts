@@ -46,6 +46,42 @@ class BookControllers {
       data: result,
     });
   });
+
+  // provide book
+  provideBook = asyncHandler(async (req, res) => {
+    const result = await this.services.provideBook(req.params.id, req.body);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} provide Successfully`,
+      data: result,
+    });
+  });
+
+  // borrowed Back
+  borrowedBack = asyncHandler(async (req, res) => {
+    const result = await this.services.borrowedBack(req.params.id, req.body);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} borrowed Back Successfully`,
+      data: result,
+    });
+  });
+
+  // borrowed Back
+  getBookOfStudent = asyncHandler(async (req, res) => {
+    const result = await this.services.getBookOfStudent(req.user._id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: STATUS.OK,
+      message: `${this.messageTitle} fetched Successfully`,
+      data: result,
+    });
+  });
 }
 
 const bookControllers = new BookControllers();
