@@ -153,6 +153,8 @@ class FeeFormServices {
       departmentId: chairman?.departmentId, status
     }
 
+    console.log(query)
+
     if (queryParams.search) {
       const student = await Student.findOne({ studentId: queryParams.search })
       if (student) {

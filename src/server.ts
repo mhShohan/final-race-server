@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Server, createServer } from 'http';
 import mongoose from 'mongoose';
 import app from './app';
