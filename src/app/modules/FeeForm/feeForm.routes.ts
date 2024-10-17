@@ -30,7 +30,7 @@ feeFromRoutes.get(
 
 feeFromRoutes.get(
   '/by-chairman',
-  verifyRole([ 'CHAIRMAN' ]),
+  verifyRole([ 'CHAIRMAN', 'DEPARTMENT_OPERATOR' ]),
   feeFormControllers.getAllByChairman,
 );
 

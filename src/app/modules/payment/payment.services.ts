@@ -53,8 +53,7 @@ class PaymentServices {
       query.hallId = queryParams.hallId;
     }
 
-
-    return this.model.find(query);
+    return this.model.find(query).populate('studentId').populate('departmentId').populate('hallId').populate('formId');
   }
 
 }

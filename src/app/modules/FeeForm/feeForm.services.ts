@@ -123,6 +123,7 @@ class FeeFormServices {
 
 
     return await FeeForm.find(query)
+      .populate('studentId')
       .populate('departmentalFeeId')
       .populate('residentialFeeId')
       .populate('semesterFeeId');
@@ -151,6 +152,8 @@ class FeeFormServices {
     const query: Record<string, unknown> = {
       departmentId: chairman?.departmentId, status
     }
+
+    console.log(query)
 
     if (queryParams.search) {
       const student = await Student.findOne({ studentId: queryParams.search })
