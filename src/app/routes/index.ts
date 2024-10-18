@@ -12,6 +12,7 @@ import registrationInfoRoutes from '../modules/registrationInfo/registrationInfo
 import studentRoutes from '../modules/student/student.routes';
 import paymentRoutes from '../modules/payment/payment.routes';
 import bookRoutes from '../modules/book/book.routes';
+import cleanUpApplication from '../modules/cleanUpApplication';
 
 const rootRoutes = Router();
 
@@ -28,5 +29,6 @@ rootRoutes.use('/residential-fee-form', residentialFeeFormRoutes);
 rootRoutes.use('/fee-form', feeFromRoutes);
 rootRoutes.use('/payments', paymentRoutes);
 rootRoutes.use('/books', bookRoutes);
+rootRoutes.get('/application-cleanup', cleanUpApplication);
 
 export default rootRoutes;
